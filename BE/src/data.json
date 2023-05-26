@@ -1,0 +1,245 @@
+[
+  {
+    "nameCake": "Pink Princess Cake",
+    "detail": "Pink Princess Cake is a delicious and visually stunning dessert that is often served at special occasions such as birthdays and weddings. This cake typically consists of several layers of moist, vanilla sponge cake that are filled with layers of light and fluffy whipped cream and sliced fresh strawberries.  What sets Pink Princess Cake apart from other cakes is its unique appearance. The cake is covered in a layer of bright pink marzipan or fondant, which is then decorated with intricate designs and patterns made from white icing or frosting. These decorations often include delicate flowers, lace-like patterns, and even small crowns or tiaras, giving the cake a regal and elegant look that is sure to impress.  Pink Princess Cake is believed to have originated in Sweden, where it is known as \"Prinsesstårta\". It has since become a popular dessert in many countries around the world, particularly in Scandinavia, where it is often served during celebrations such as Midsummer and Christmas.  Whether you're looking to impress guests at a special event or simply want to indulge in a delicious and visually stunning dessert, Pink Princess Cake is a wonderful choice that is sure to delight. The marzipan or fondant that covers the Pink Princess Cake is often flavored with almond extract, giving it a subtle nutty taste that complements the cake's other flavors.  In addition to vanilla sponge cake, some variations of Pink Princess Cake may use other types of cake such as chocolate or lemon.  Pink Princess Cake is traditionally served chilled, which helps to keep the whipped cream filling firm and the cake layers moist.  Because of its intricate decoration and delicate flavors, Pink Princess Cake is considered a high-end dessert and is often priced accordingly at bakeries and cafes.  If you're feeling ambitious, you can try making Pink Princess Cake at home using a recipe that includes step-by-step instructions for creating the cake layers, whipped cream filling, and decorative covering.",
+    "quantity": 1,
+    "price": 50000,
+    "sold": 10,
+    "inventory": 90,
+    "images": "https://nguyenvancuong1ty.github.io/intern_cake/img/cake0.webp"
+  },
+  {
+    "nameCake": "Chocolate Layer Cake",
+    "detail": "Chocolate Layer Cake is a rich and decadent dessert that is beloved by chocolate lovers all around the world. As its name suggests, this cake consists of several layers of moist chocolate cake that are separated by layers of creamy chocolate frosting or ganache.  The cake itself is typically made using ingredients such as cocoa powder, flour, sugar, eggs, and butter, which are mixed together and baked in round cake pans. Once the cakes have cooled, they are stacked on top of each other and layered with frosting, which can be made using a variety of ingredients such as butter, powdered sugar, cream, and melted chocolate.  Chocolate Layer Cake is a classic dessert that has been enjoyed for generations. It is often served at birthday parties, weddings, and other special occasions, and can be decorated with a variety of toppings and decorations such as fresh fruit, whipped cream, chocolate shavings, or even edible flowers.  Variations of Chocolate Layer Cake can include different types of chocolate such as dark chocolate, milk chocolate, or white chocolate, as well as different types of fillings such as raspberry jam, caramel sauce, or peanut butter frosting. Some recipes also incorporate other flavors such as coffee, orange, or mint to add depth and complexity to the chocolate flavor.  If you're looking to make Chocolate Layer Cake at home, there are many recipes available online that offer step-by-step instructions for making the cake layers, frosting, and decorations. With a little practice and patience, you can create a delicious and impressive Chocolate Layer Cake that is sure to delight your friends and family.",
+    "quantity": 1,
+    "price": 45000,
+    "sold": 20,
+    "inventory": 80,
+    "images": "https://nguyenvancuong1ty.github.io/intern_cake/img/cake1.webp"
+  },
+  {
+    "nameCake": "Vanilla Birthday Cake",
+    "detail": "Vanilla Birthday Cake is a classic dessert that is often served at birthday parties and other celebratory events. This cake is characterized by its light and fluffy texture, delicate vanilla flavor, and festive decorations.  The cake itself is typically made using ingredients such as flour, sugar, eggs, butter, and vanilla extract. These ingredients are mixed together to create a smooth batter that is then baked in round cake pans. Once the cakes have cooled, they are layered with frosting or buttercream, which can be flavored with additional vanilla extract or other ingredients such as chocolate, fruit, or nuts.  Vanilla Birthday Cake is often decorated with colorful frosting or icing, which can be piped onto the cake in a variety of shapes and designs. Common decorations include swirls, dots, stars, and other festive shapes. The cake may also be topped with sprinkles, candy, or other edible decorations.  While Vanilla Birthday Cake is a simple dessert, it is beloved by many for its comforting and nostalgic flavor. It is often associated with childhood memories and is a popular choice for both children and adults.  If you're looking to make Vanilla Birthday Cake at home, there are many recipes available online that offer step-by-step instructions for making the cake layers, frosting, and decorations. With a little practice and creativity, you can create a delicious and visually appealing cake that is sure to make any birthday celebration extra special.",
+    "quantity": 1,
+    "price": 40000,
+    "sold": 15,
+    "inventory": 85,
+    "images": "https://nguyenvancuong1ty.github.io/intern_cake/img/cake6.webp"
+  },
+  {
+    "nameCake": "Classic White Wedding Cake",
+    "detail": "The Classic White Wedding Cake is a traditional dessert that is often served at weddings and other formal events. This cake is characterized by its light and fluffy texture, delicate flavor, and elegant decorations.  The cake itself is typically made using ingredients such as flour, sugar, eggs, butter, and vanilla extract. These ingredients are mixed together to create a smooth batter that is then baked in round cake pans. The cakes are then stacked on top of each other, separated by layers of creamy white frosting or buttercream.  The frosting used on the Classic White Wedding Cake is often made using a mixture of butter, powdered sugar, and cream, which creates a smooth and creamy texture that complements the delicate flavor of the cake. The cake may also be decorated with intricate designs and patterns made from white icing or frosting, creating a sophisticated and timeless look that is perfect for a wedding or other formal event.  While the Classic White Wedding Cake is a traditional dessert, there are many variations and flavors that can be incorporated into the recipe. Some cakes may include additional ingredients such as almond extract or lemon zest, while others may be filled with fresh fruit or other types of frosting such as chocolate or raspberry.  If you're looking to make a Classic White Wedding Cake at home, there are many recipes available online that offer step-by-step instructions for making the cake layers, frosting, and decorations. With a little practice and patience, you can create a beautiful and delicious cake that is sure to impress your guests on your special day.",
+    "quantity": 1,
+    "price": 200000,
+    "sold": 5,
+    "inventory": 15,
+    "images": "https://nguyenvancuong1ty.github.io/intern_cake/img/cake3.webp"
+  },
+  {
+    "nameCake": "Elegant Lace Wedding Cake",
+    "detail": "The Elegant Lace Wedding Cake is a beautiful and intricate dessert that is often served at weddings and other formal events. This cake is characterized by its delicate lace-like design, elegant appearance, and rich, moist texture.  The cake itself is typically made using ingredients such as flour, sugar, eggs, and butter, which are mixed together to create a smooth batter that is then baked in round cake pans. Once the cakes have cooled, they are stacked on top of each other and layered with a rich, buttery frosting or buttercream.  The lace-like design that gives the Elegant Lace Wedding Cake its signature look is typically created using a special technique called piping. This involves using a piping bag and a small round tip to create intricate swirls and patterns on the cake's surface. The patterns may be inspired by traditional lace designs, or they may be customized to reflect the couple's unique style and personality.  The Elegant Lace Wedding Cake is a classic and timeless dessert that is sure to impress guests with its beauty and sophistication. It is often served at formal events and is a popular choice for couples who are looking for a wedding cake that is both elegant and unique.  If you're looking to make an Elegant Lace Wedding Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this stunning dessert. With a little practice and patience, you can create a beautiful and delicious cake that is sure to be a highlight of your special day.",
+    "quantity": 1,
+    "price": 250000,
+    "sold": 2,
+    "inventory": 18,
+    "images": "https://nguyenvancuong1ty.github.io/intern_cake/img/cake6.webp"
+  },
+  {
+    "nameCake": "Rustic Buttercream Wedding Cake",
+    "detail": "The Rustic Buttercream Wedding Cake is a simple yet elegant dessert that is often served at weddings and other rustic-themed events. This cake is characterized by its natural, textured appearance and rich, buttery flavor.  The cake itself is typically made using ingredients such as flour, sugar, eggs, and butter, which are mixed together to create a smooth batter that is then baked in round cake pans. Once the cakes have cooled, they are stacked on top of each other and layered with a generous coating of buttercream frosting.  The frosting used on the Rustic Buttercream Wedding Cake is typically textured and rustic in appearance, with visible swirls and peaks that create a natural, organic look. The cake may also be decorated with fresh flowers, berries, or other natural elements that reflect the rustic theme of the event.  The Rustic Buttercream Wedding Cake is a popular choice for couples who are looking for a simple yet elegant dessert that is both delicious and visually appealing. It is often served at outdoor weddings, barn weddings, and other events that embrace a rustic or natural aesthetic.  If you're looking to make a Rustic Buttercream Wedding Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this beautiful dessert. With a little creativity and a few simple techniques, you can create a stunning cake that is sure to impress your guests and add a touch of rustic charm to your special day.",
+    "quantity": 1,
+    "price": 175000,
+    "sold": 8,
+    "inventory": 22,
+    "images": "https://nguyenvancuong1ty.github.io/intern_cake/img/banh.webp"
+  },
+  {
+    "nameCake": "Gold Anniversary Cake",
+    "detail": "The Gold Anniversary Cake is a special dessert that is often served to celebrate a couple's 50th wedding anniversary. This cake is characterized by its elegant gold decorations, which symbolize the couple's enduring love and commitment to each other.  The cake itself is typically made using ingredients such as flour, sugar, eggs, and butter, which are mixed together to create a smooth batter that is then baked in round cake pans. Once the cakes have cooled, they are stacked on top of each other and layered with a rich, buttery frosting.  The gold decorations that give the Gold Anniversary Cake its signature look are typically created using edible gold leaf, which is a thin sheet of gold that is applied to the surface of the cake using a special technique. The gold leaf may be used to create intricate designs and patterns on the cake's surface, or it may be applied in a more subtle way to create a shimmering, golden sheen.  The Gold Anniversary Cake is a beautiful and meaningful dessert that is often served at 50th wedding anniversary celebrations. It is a tribute to the couple's enduring love and commitment to each other, and is a fitting way to mark this important milestone in their lives.  If you're looking to make a Gold Anniversary Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this stunning dessert. With a little patience and a steady hand, you can create a beautiful and delicious cake that is sure to be a highlight of your anniversary celebration.",
+    "quantity": 1,
+    "price": 100000,
+    "sold": 3,
+    "inventory": 12,
+    "images": "https://nguyenvancuong1ty.github.io/intern_cake/img/banh1.webp"
+  },
+  {
+    "nameCake": "Diamond Anniversary Cake",
+    "detail": "The Diamond Anniversary Cake is a special dessert that is often served to celebrate a couple's 60th wedding anniversary. This cake is characterized by its elegant diamond decorations, which symbolize the strength and resilience of the couple's relationship over the past six decades.  The cake itself is typically made using ingredients such as flour, sugar, eggs, and butter, which are mixed together to create a smooth batter that is then baked in round cake pans. Once the cakes have cooled, they are stacked on top of each other and layered with a rich, buttery frosting.  The diamond decorations that give the Diamond Anniversary Cake its signature look are typically created using edible diamond-shaped jewels, which are made from sugar or fondant and applied to the surface of the cake using a special technique. The jewels may be arranged in intricate patterns and designs, or they may be used sparingly to create a subtle yet elegant effect.  The Diamond Anniversary Cake is a beautiful and meaningful dessert that is often served at 60th wedding anniversary celebrations. It is a tribute to the couple's enduring love and commitment to each other, and is a fitting way to mark this important milestone in their lives.  If you're looking to make a Diamond Anniversary Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this stunning dessert. With a little creativity and attention to detail, you can create a beautiful and delicious cake that is sure to be a highlight of your anniversary celebration.",
+    "quantity": 1,
+    "price": 150000,
+    "sold": 2,
+    "inventory": 10,
+    "images": "https://nguyenvancuong1ty.github.io/intern_cake/img/banh2.webp"
+  },
+  {
+    "nameCake": "Red Velvet Anniversary Cake",
+    "detail": "The Red Velvet Anniversary Cake is a special dessert that is often served to celebrate a couple's milestone wedding anniversary. This cake is characterized by its rich, velvety texture and deep red color, which symbolizes the passion and love that the couple shares.  The cake itself is typically made using ingredients such as flour, cocoa powder, buttermilk, and red food coloring, which are mixed together to create a smooth batter that is then baked in round cake pans. Once the cakes have cooled, they are stacked on top of each other and layered with a creamy, tangy frosting made from cream cheese and butter.  The Red Velvet Anniversary Cake is a popular choice for couples who are celebrating a milestone anniversary, such as their 25th or 50th year together. It is a tribute to the enduring love and commitment that the couple shares, and is a fitting way to mark this important milestone in their lives.  If you're looking to make a Red Velvet Anniversary Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this delicious and visually stunning dessert. With a little creativity and attention to detail, you can create a beautiful and memorable cake that is sure to be a hit with your guests and loved ones.",
+    "quantity": 1,
+    "price": 120000,
+    "sold": 4,
+    "inventory": 18,
+    "images": "https://nguyenvancuong1ty.github.io/intern_cake/img/banh3.webp"
+  },
+  {
+    "nameCake": "Halloween Cake",
+    "detail": "The Halloween Cake is a fun and festive dessert that is often served during the Halloween season. This cake is characterized by its spooky decorations and playful designs, which can include anything from creepy crawlies to witches and ghosts.  The cake itself is typically made using ingredients such as flour, sugar, eggs, and butter, which are mixed together to create a smooth batter that is then baked in a cake pan. Once the cake has cooled, it can be frosted with a variety of different flavors and colors, depending on the desired effect.  Some popular Halloween Cake decorations include black and orange frosting, candy corn, spiderwebs made from frosting, edible eyeballs, and spooky cake toppers such as plastic spiders, skeletons, and bats. The cake can also be shaped into fun Halloween-themed designs, such as a pumpkin or a witch's hat.  The Halloween Cake is a perfect dessert for Halloween parties, potlucks, or other festive gatherings. It is a fun and creative way to celebrate the season and indulge in some sweet treats.  If you're looking to make a Halloween Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this playful and delicious dessert. With a little imagination and creativity, you can create a cake that is sure to be a hit with your friends and family.",
+    "quantity": 1,
+    "price": 60000,
+    "sold": 12,
+    "inventory": 28,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/halo-removebg-preview.png"
+  },
+  {
+    "nameCake": "Thanksgiving Cake",
+    "detail": "The Thanksgiving Cake is a delicious and festive dessert that is often served as part of a Thanksgiving meal. This cake is characterized by its warm, comforting flavors, which are perfect for the autumn season.  The cake itself is typically made using ingredients such as flour, sugar, eggs, and butter, which are mixed together to create a smooth batter that is then baked in a cake pan. Once the cake has cooled, it can be frosted with a variety of different flavors and colors, depending on the desired effect.  Some popular Thanksgiving Cake flavors include pumpkin spice, apple cinnamon, and maple pecan. The cake can also be decorated with autumn-themed designs, such as leaves, acorns, and pumpkins, which can be made from frosting, fondant, or other edible materials.  The Thanksgiving Cake is a perfect dessert to serve at a Thanksgiving gathering or dinner party. It is a great way to cap off a delicious meal and celebrate the spirit of the holiday.  If you're looking to make a Thanksgiving Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this delicious and festive dessert. With a little creativity and imagination, you can create a cake that is sure to be a hit with your friends and family.",
+    "quantity": 1,
+    "price": 70000,
+    "sold": 8,
+    "inventory": 25,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/thankcake-removebg-preview.png"
+  },
+  {
+    "nameCake": "Christmas Cake",
+    "detail": "The Christmas Cake is a traditional dessert that is often served during the Christmas holiday season. This cake is characterized by its rich, fruity flavor and festive decorations, which can include everything from colorful icing to edible ornaments.  The cake itself is typically made using ingredients such as flour, sugar, eggs, and dried fruits such as raisins, currants, and candied peel. These ingredients are mixed together to create a rich, dense cake batter that is then baked in a cake pan. Once the cake has cooled, it can be soaked in brandy or other spirits to enhance its flavor and moistness.  Some popular Christmas Cake decorations include icing in the shape of snowflakes or Christmas trees, marzipan figurines, and edible glitter or sprinkles. The cake can also be decorated with nuts, berries, and other seasonal fruits to add a festive touch.  The Christmas Cake is a classic dessert that is enjoyed by people all over the world during the holiday season. It is often served as part of a Christmas dinner or as a sweet treat to enjoy with family and friends.  If you're looking to make a Christmas Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this delicious and festive dessert. With a little practice and patience, you can create a beautiful and memorable cake that is sure to delight your loved ones this holiday season.",
+    "quantity": 1,
+    "price": 80000,
+    "sold": 10,
+    "inventory": 20,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/noel-removebg-preview.png"
+  },
+  {
+    "nameCake": "Gender Reveal Cake",
+    "detail": "The Gender Reveal Cake is a fun and creative way for expecting parents to announce the gender of their baby to family and friends. This cake is typically designed to reveal the gender of the baby through the color of its interior frosting or cake batter.  The cake itself is typically made using ingredients such as flour, sugar, eggs, and butter, which are mixed together to create a smooth batter that is then baked in a cake pan. Once the cake has cooled, it is typically frosted in a neutral color such as white or yellow.  The interior of the cake is where the gender reveal comes in. This can be accomplished by either tinting the cake batter or frosting with blue or pink food coloring, or by adding a layer of blue or pink frosting in between the cake layers.  To reveal the gender of the baby, the expecting parents will cut into the cake to reveal the interior color, which will either be blue for a boy or pink for a girl. This is often a surprise not only for family and friends but also for the expecting parents themselves!  Gender Reveal Cakes have become increasingly popular in recent years as a way to celebrate the upcoming arrival of a new baby. There are many different variations and designs to choose from, including cakes decorated with baby toys, rattles, or other baby-themed designs.  If you're looking to make a Gender Reveal Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this fun and creative dessert. With a little creativity and imagination, you can create a cake that is sure to surprise and delight your guests.",
+    "quantity": 1,
+    "price": 90000,
+    "sold": 6,
+    "inventory": 16,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/v-removebg-preview.png"
+  },
+  {
+    "nameCake": "Graduation Cake",
+    "detail": "The Graduation Cake is a celebratory dessert that is often served at graduation parties and ceremonies to mark the achievement of completing a degree or program of study. This cake is typically designed to reflect the graduate's school colors, personal interests, and future aspirations.  The cake itself is typically made using ingredients such as flour, sugar, eggs, and butter, which are mixed together to create a smooth batter that is then baked in a cake pan. Once the cake has cooled, it can be frosted with a variety of different flavors and colors, depending on the desired effect.  Some popular Graduation Cake designs include cakes decorated with graduation caps, diplomas, or school mascots. The cake can also be decorated with the graduate's name, graduation year, and any personal messages or well wishes.  The Graduation Cake is a perfect dessert to serve at a graduation party or ceremony. It is a great way to recognize the achievements of the graduate and celebrate their future success.  If you're looking to make a Graduation Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this celebratory dessert. With a little creativity and imagination, you can create a cake that is sure to be a hit with the graduate and their guests.",
+    "quantity": 1,
+    "price": 100000,
+    "sold": 5,
+    "inventory": 15,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/a-removebg-preview.png"
+  },
+  {
+    "nameCake": "Custom Flower Cake",
+    "detail": "A Custom Flower Cake is a beautiful and artistic dessert that is typically made to celebrate special occasions such as weddings, birthdays, and anniversaries. This cake is designed to showcase the beauty and elegance of fresh flowers, which are used to decorate the cake in a variety of different ways.  The cake itself is typically made using ingredients such as flour, sugar, eggs, and butter, which are mixed together to create a smooth batter that is then baked in a cake pan. Once the cake has cooled, it is often layered and frosted with a variety of different flavors and colors.  The flowers used to decorate the Custom Flower Cake can be fresh or artificial, depending on personal preference and availability. Fresh flowers such as roses, peonies, and dahlias are often used to create stunning floral arrangements that cascade down the sides of the cake or form a beautiful bouquet on top. Artificial flowers such as silk or paper flowers can also be used to create a long-lasting and durable decoration that can be saved as a keepsake.  Custom Flower Cakes can be designed in a variety of different styles, from elegant and minimalist to bold and colorful. The cake can be decorated with a single type of flower or a combination of different flowers, depending on the desired effect. The colors and textures of the flowers can also be used to complement the overall theme and style of the event.  If you're looking to make a Custom Flower Cake at home, there are many recipes and tutorials available online that can guide you through the process of creating this beautiful and artistic dessert. With a little creativity and imagination, you can create a cake that is sure to be a showstopper at any special occasion.",
+    "quantity": 1,
+    "price": 150000,
+    "sold": 2,
+    "inventory": 10,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/aa.png"
+  },
+  {
+    "nameCake": "Mediocre Granite Plate",
+    "detail": "A Mediocre Granite Plate is not a specific type of dessert or food item, but rather a description of a serving plate that is made from granite and considered to be average or unremarkable in quality or appearance.  Granite is a popular material for serving plates due to its durability, heat resistance, and natural beauty. However, not all granite plates are created equal, and some may be of lower quality or less visually appealing than others.  A Mediocre Granite Plate may be characterized by its lack of unique or interesting features, such as unusual patterns or color variations. It may also have visible imperfections or blemishes, such as chips or scratches, that detract from its overall aesthetic appeal.  Despite its mediocre appearance, a Granite Plate can still be a useful and functional item for serving desserts or other food items. It can be used to showcase a variety of different desserts, such as cakes, pies, or pastries, and can be paired with complementary tableware to create an attractive and cohesive presentation.  If you're looking to purchase a Granite Plate for serving desserts or other food items, it's important to do your research and choose a high-quality plate that meets your needs and preferences. Look for plates that are made from high-quality granite, are free from visible imperfections, and have unique and interesting features that add to their overall beauty and appeal.",
+    "quantity": 1,
+    "price": 200000,
+    "sold": 50,
+    "inventory": 49,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/vlt1.webp"
+  },
+  {
+    "nameCake": "Heavy Duty Paper Car",
+    "detail": "A Heavy Duty Paper Car is not a specific type of dessert or food item, but rather a description of a toy car that is made from heavy-duty paper and designed to be sturdy and durable. This type of toy car is often used as a decorative item or party favor at children's birthday parties, baby showers, or other special events.  Heavy Duty Paper Cars are typically made using high-quality paper that is thick and durable, allowing the car to withstand wear and tear from rough handling or play. The paper is often coated or laminated to provide added strength and protection, and the car may be designed with reinforced seams or other features to prevent tearing or damage.  These paper cars come in a variety of different shapes and designs, from classic sports cars and vintage vehicles to modern trucks and race cars. They can be customized with different colors, patterns, and graphics to match the theme or color scheme of the event, and may be decorated with stickers, markers, or other craft supplies to make them even more unique and personalized.  Heavy Duty Paper Cars can be a fun and creative way to entertain children and add a touch of whimsy to any party or event. They can be used as decorations on tables or as part of a centerpiece, and can be filled with small toys or candy to serve as a party favor or gift. With their sturdy construction and customizable design, Heavy Duty Paper Cars are a popular choice for parents, party planners, and craft enthusiasts alike.",
+    "quantity": 1,
+    "price": 235000,
+    "sold": 15,
+    "inventory": 99,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/vlt2.webp"
+  },
+  {
+    "nameCake": "Rustic Wooden Coat",
+    "detail": "A Rustic Wooden Coat is not a specific type of dessert or food item, but rather a description of a coat rack or hanger that is made from wood and has a rustic or natural appearance. This type of coat rack is often used as a decorative and functional item in homes, offices, or other interior spaces.  Rustic Wooden Coats are typically made from solid wood or reclaimed wood, and may be designed with natural imperfections or irregularities that give them a rustic or vintage look. The wood may be left in its natural state, or it may be stained, painted, or distressed to achieve a desired effect.  These coat racks come in a variety of different styles and sizes, from simple wall-mounted hooks to freestanding racks with multiple arms or branches. They may be designed with additional features such as shelves, drawers, or mirrors, to provide added functionality or storage.  Rustic Wooden Coats can be a stylish and practical way to organize and display clothing, hats, bags, or other accessories. They can be used in a variety of different settings, from entryways and mudrooms to bedrooms, offices, or dressing rooms. With their natural beauty and durability, Rustic Wooden Coats are a popular choice for those who appreciate the warmth and character of natural materials.",
+    "quantity": 1,
+    "price": 455000,
+    "sold": 15,
+    "inventory": 99,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/vlt3.webp"
+  },
+  {
+    "nameCake": "Fantastic Plastic Watch",
+    "detail": "A Fantastic Plastic Watch is not a type of dessert or food item, but rather a type of wristwatch that is made from plastic and has a unique or stylish design. These watches are often considered fashionable accessories that can be worn by both men and women.  Fantastic Plastic Watches are typically made from high-quality plastic materials that are lightweight, durable, and easy to clean. They may be designed with a variety of different features, such as a digital or analog display, stopwatch, timer, or alarm.  These watches come in a wide range of colors and styles, from bright and bold to understated and classic. They may be designed with unique patterns, graphics, or textures, and may be embellished with rhinestones, jewels, or other decorative elements.  Fantastic Plastic Watches can be a fun and stylish way to add a pop of color or personality to any outfit. They can be worn on their own as a statement piece, or paired with other accessories such as bracelets or necklaces. With their affordable price point and wide range of styles, Fantastic Plastic Watches are a popular choice for those who want to stay on-trend without breaking the bank.",
+    "quantity": 1,
+    "price": 300000,
+    "sold": 56,
+    "inventory": 22,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/vlt4.webp"
+  },
+  {
+    "nameCake": "Incredible Cotton Shirt",
+    "detail": "An Incredible Cotton Shirt is not a type of dessert or food item, but rather a type of clothing item that is made from high-quality cotton and has a unique or exceptional design. These shirts are often considered fashionable and versatile pieces that can be worn by both men and women in a variety of settings.  Incredible Cotton Shirts are typically made from high-quality, soft and breathable cotton materials that are comfortable to wear and easy to care for. They may be designed with a variety of different features, such as a collar, button-front or pullover style, long or short sleeves, or pockets.  These shirts come in a wide range of colors and styles, from casual and relaxed to more formal and dressy. They may be designed with unique patterns, graphics, or prints, and may be embellished with embroidery, applique, or other decorative elements.  Incredible Cotton Shirts can be a versatile and stylish way to add a touch of personality and comfort to any outfit. They can be worn on their own with jeans or shorts for a casual look, or paired with dress pants or skirts for a more formal occasion. With their quality construction and unique design, Incredible Cotton Shirts are a popular choice for those who want to make a statement with their clothing.",
+    "quantity": 1,
+    "price": 270000,
+    "sold": 44,
+    "inventory": 48,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/vlt5.webp"
+  },
+  {
+    "nameCake": "Lightweight Wool Keyboard",
+    "detail": "A Lightweight Wool Keyboard is not a type of dessert or food item, but rather a type of computer keyboard that is made from wool and is designed to be lightweight and portable. These keyboards are often considered an eco-friendly and sustainable alternative to traditional plastic keyboards.  Lightweight Wool Keyboards are typically made from natural wool fibers that are soft, durable, and biodegradable. They may be designed with a variety of different features, such as a standard layout, wireless connectivity, and backlit keys for use in low-light conditions.  These keyboards come in a range of colors and styles, from minimalist and modern to more decorative and colorful. They may be designed to fit a variety of different devices, including laptops, tablets, and smartphones.  Lightweight Wool Keyboards can be a practical and eco-friendly way to type on-the-go or at home. They are easy to pack and transport, and can be a comfortable alternative to hard plastic keyboards. With their unique design and sustainable materials, Lightweight Wool Keyboards are a popular choice for those who prioritize both function and sustainability in their technology products.",
+    "quantity": 1,
+    "price": 419000,
+    "sold": 9,
+    "inventory": 74,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/frame_2.webp"
+  },
+  {
+    "nameCake": "Chocolate cupcake",
+    "detail": "A chocolate cupcake is a small, individual-sized cake that is made from chocolate batter and topped with frosting or other sweet decorations. Chocolate cupcakes are a popular dessert that can be enjoyed at a variety of occasions, from birthday parties to weddings to everyday treats.  Chocolate cupcake batter is typically made from a mixture of flour, sugar, cocoa powder, baking powder, baking soda, salt, eggs, milk, and oil or butter. The batter is poured into cupcake liners and baked in a muffin tin in the oven. Once the cupcakes are fully baked, they can be removed from the oven and allowed to cool before being frosted or decorated.  Chocolate cupcakes can be topped with a variety of frostings or decorations, depending on personal preference. Common toppings include buttercream frosting, chocolate ganache, whipped cream, sprinkles, and chocolate chips. Some chocolate cupcakes may also be filled with a chocolate ganache or other sweet filling to add an extra layer of flavor.  Chocolate cupcakes are a classic dessert that are beloved by many for their rich chocolate flavor and bite-sized portions. They can be a fun and festive addition to any celebration, or a satisfying treat to enjoy at home.",
+    "quantity": 1,
+    "price": 29900,
+    "sold": 5,
+    "inventory": 5,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/cc3-removebg-preview.png"
+  },
+  {
+    "nameCake": "Vanilla cupcake",
+    "detail": "A vanilla cupcake is a small, individual-sized cake that is made from vanilla batter and topped with frosting or other sweet decorations. Vanilla cupcakes are a popular dessert that can be enjoyed at a variety of occasions, from birthday parties to weddings to everyday treats.  Vanilla cupcake batter is typically made from a mixture of flour, sugar, baking powder, baking soda, salt, eggs, milk, and vanilla extract. The batter is poured into cupcake liners and baked in a muffin tin in the oven. Once the cupcakes are fully baked, they can be removed from the oven and allowed to cool before being frosted or decorated.  Vanilla cupcakes can be topped with a variety of frostings or decorations, depending on personal preference. Common toppings include buttercream frosting, cream cheese frosting, fruit compote, sprinkles, and chocolate chips. Some vanilla cupcakes may also be filled with a sweet filling such as jam, lemon curd, or pastry cream to add an extra layer of flavor.  Vanilla cupcakes are a classic dessert that are beloved by many for their simple yet delicious flavor. They can be a fun and versatile addition to any celebration, or a satisfying treat to enjoy at home.",
+    "quantity": 1,
+    "price": 24900,
+    "sold": 3,
+    "inventory": 12,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/cc1-removebg-preview.png"
+  },
+  {
+    "nameCake": "Strawberry cupcake",
+    "detail": "A strawberry cupcake is a small, individual-sized cake that is made from strawberry-flavored batter and topped with frosting or other sweet decorations. Strawberry cupcakes are a popular dessert that can be enjoyed at a variety of occasions, from birthdays to weddings to everyday treats.  Strawberry cupcake batter is typically made from a mixture of flour, sugar, baking powder, baking soda, salt, eggs, milk, and strawberry puree. The batter is poured into cupcake liners and baked in a muffin tin in the oven. Once the cupcakes are fully baked, they can be removed from the oven and allowed to cool before being frosted or decorated.  Strawberry cupcakes can be topped with a variety of frostings or decorations, depending on personal preference. Common toppings include strawberry buttercream frosting, cream cheese frosting with chopped strawberries, whipped cream, fresh strawberries, and sprinkles. Some strawberry cupcakes may also be filled with a strawberry jam or pastry cream to add an extra layer of flavor.  Strawberry cupcakes are a sweet and fruity dessert that are perfect for spring and summer celebrations. They can be a fun and colorful addition to any party, or a delicious treat to enjoy at home.",
+    "quantity": 1,
+    "price": 34900,
+    "sold": 2,
+    "inventory": 10,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/cc2-removebg-preview.png"
+  },
+  {
+    "nameCake": "Red Velvet cupcake",
+    "detail": "A red velvet cupcake is a small, individual-sized cake that is made from a distinctive red-colored chocolate batter and topped with cream cheese frosting. Red velvet cupcakes are a popular dessert that can be enjoyed at a variety of occasions, from weddings to Valentine's Day to everyday treats.  Red velvet cupcake batter is typically made from a mixture of flour, cocoa powder, sugar, baking powder, baking soda, salt, eggs, oil, buttermilk, and red food coloring. The batter is poured into cupcake liners and baked in a muffin tin in the oven. Once the cupcakes are fully baked, they can be removed from the oven and allowed to cool before being frosted with cream cheese frosting.  Cream cheese frosting is the traditional topping for red velvet cupcakes and is made from a mixture of cream cheese, butter, powdered sugar, and vanilla extract. The frosting is typically piped onto the cupcakes using a pastry bag to create a swirl or other decorative design.  Red velvet cupcakes are a classic dessert that are beloved by many for their unique flavor and striking appearance. They can be a fun and festive addition to any celebration, or a delicious treat to enjoy on their own.",
+    "quantity": 1,
+    "price": 39900,
+    "sold": 1,
+    "inventory": 7,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/cc4-removebg-preview.png"
+  },
+  {
+    "nameCake": "Carrot cupcake",
+    "detail": "",
+    "quantity": 1,
+    "price": 21900,
+    "sold": 4,
+    "inventory": 16,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/cc7-removebg-preview.png"
+  },
+  {
+    "nameCake": "Cupcakes tout framboise",
+    "detail": "",
+    "quantity": 1,
+    "price": 33000,
+    "sold": 12,
+    "inventory": 23,
+    "images": "https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/cc6-removebg-preview.png"
+  }
+]

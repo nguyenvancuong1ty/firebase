@@ -1,0 +1,158 @@
+:root {
+    --bgcolor--: #2d2d2d;
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+ul {
+    list-style: none;
+}
+header {
+    z-index: 999;
+    background: var(--bgcolor--);
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+.header {
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.header .logo {
+    height: 50px;
+}
+
+.header-input {
+    display: flex;
+    width: 100%;
+    border-radius: 999px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+.header-input input {
+    width: 100%;
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border: none;
+    padding: 8px 16px;
+    outline: none;
+}
+
+.header-input .header__input--icon {
+    display: flex;
+    padding: 0 12px;
+    align-items: center;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: #fabd0d;
+    color: white;
+    cursor: pointer;
+}
+
+.header__opstion {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+}
+.account {
+    cursor: pointer;
+}
+.overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0.4;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: none;
+    z-index: 9999;
+}
+
+b {
+    font-size: 16px;
+}
+
+.modals {
+    background-color: var(--primary-color--);
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btn_modal {
+    width: 80px;
+    padding: 8px 16px;
+    margin: 24px 16px;
+    border: none;
+    border-radius: 99px;
+    outline: none;
+    cursor: pointer;
+}
+
+.show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: ani 0.4s linear forwards;
+}
+
+@keyframes ani {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header__opstion--title {
+    min-width: 50px;
+    color: white;
+    font-size: 16px;
+    margin: 0;
+}
+
+.header__opstion--item {
+    text-align: center;
+    padding: 8px;
+}
+
+.header__opstion--link {
+    position: relative;
+}
+
+.number__product {
+    width: 20px;
+    height: 20px;
+    background-color: yellow;
+    color: red;
+    position: absolute;
+    top: -12px;
+    right: 4px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container__head--navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.product__show {
+    cursor: pointer;
+    position: relative;
+}

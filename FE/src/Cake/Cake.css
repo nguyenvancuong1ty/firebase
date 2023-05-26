@@ -1,0 +1,100 @@
+.product__content--item {
+    padding: 4px;
+    position: relative;
+    color: black;
+}
+
+.product__content--img {
+    width: 100%;
+    display: block;
+}
+.product__content--name {
+    min-height: 48px;
+}
+
+.product__content--img--foreign {
+    position: absolute;
+    top: 24px;
+    left: 25%;
+    width: 50%;
+    height: 130px;
+    object-fit: cover;
+}
+
+.product__content--item:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+.product__content--text {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.product__content--price {
+    text-decoration: line-through;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.product__content--submit {
+    display: flex;
+    padding: 6px 24px;
+    border: 1px solid var(--primary-color--);
+    border-radius: 9999px;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color--);
+    width: 180px;
+    margin: 0 auto;
+}
+.flashsale__content--bought {
+    background-color: #ffaaaf;
+    position: relative;
+    color: white;
+    text-align: center;
+    border-radius: 25px;
+    width: 98%;
+    margin-bottom: 8px;
+}
+
+.bought {
+    z-index: 2;
+    color: black;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+}
+
+.bought--img {
+    float: left;
+}
+.bought__up {
+    background: linear-gradient(270deg, #ff424e, var(--primary-color--));
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    border-radius: 9999px;
+    z-index: 1;
+}
+
+.buy {
+    align-items: center;
+    background-color: #ed3324;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 1px 1px 4px #000;
+    display: flex;
+    height: 35px;
+    justify-content: center;
+    position: relative;
+    right: calc(-100% + 40px);
+    top: -20px;
+    width: 35px;
+}
+.buy-icon {
+    color: white;
+}

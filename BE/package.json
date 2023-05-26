@@ -1,0 +1,29 @@
+{
+  "name": "firebase",
+  "version": "1.0.0",
+  "description": "start with firebase",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.8",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.21.5",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase": "^9.22.0",
+    "firebase-admin": "^11.8.0",
+    "nodemon": "^2.0.22"
+  },
+  "devDependencies": {
+    "webpack": "^5.84.1",
+    "webpack-cli": "^5.1.1"
+  }
+}
