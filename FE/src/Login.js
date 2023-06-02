@@ -2,7 +2,11 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth, provider } from './firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGooglePlusG } from '@fortawesome/free-brands-svg-icons';
+import { useDispatch } from 'react-redux';
+import { setCurrent } from './redux';
+
 const Login = ({ setShow }) => {
+    const dispatch = useDispatch();
     const handleLoginWithGoogle = () => {
         signInWithPopup(auth, provider)
             .then(async (result) => {
@@ -12,6 +16,8 @@ const Login = ({ setShow }) => {
                 const user = result.user;
                 localStorage.setItem('token', token);
                 localStorage.setItem('uid', user.uid);
+                localStorage.setItem('account', 'customer');
+                dispatch(setCurrent(5));
                 setShow(false);
             })
             .catch((error) => {

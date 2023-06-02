@@ -3,10 +3,9 @@ import { decrease, increment } from '~/redux';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 
-function Quantity({ item }) {
+function Quantity({ item, setTotal, checkOut }) {
     const dispatch = useDispatch();
     const [num, setNum] = useState(item.quantity);
-
     const handleIncrease = async (item) => {
         dispatch(increment());
         setNum((prev) => prev + 1);
@@ -17,6 +16,9 @@ function Quantity({ item }) {
                 quantity: num + 1,
             },
         });
+        if (checkOut.some((checkedItem) => checkedItem.cakeID === item.cakeID)) {
+            setTotal((prev) => prev + item.cake.price);
+        }
     };
 
     const handleDecrease = async (item) => {
@@ -29,7 +31,11 @@ function Quantity({ item }) {
                 quantity: num - 1,
             },
         });
+        if (checkOut.some((checkedItem) => checkedItem.cakeID === item.cakeID)) {
+            setTotal((prev) => prev - item.cake.price);
+        }
     };
+
     return (
         <>
             <span onClick={() => handleDecrease(item)}>-</span>

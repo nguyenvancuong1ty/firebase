@@ -5,7 +5,7 @@
     z-index: 999;
     color: black;
     overflow-y: scroll;
-    height: 280px;
+    height: 340px;
     top: 100%;
     right: 0;
     border: 1px solid var(--primary-color--);
@@ -28,7 +28,14 @@
     .delete {
         padding: 4px;
         min-width: 50px;
-        margin-left: 88px;
+        border: none;
+        outline: none;
+        background-color: var(--primary-color--);
+        color: white;
+        border-radius: 999px;
+        margin: 10px 0;
+        margin-left: 60px;
+        font-weight: 600;
     }
 
     b {
@@ -108,7 +115,7 @@
     .total_price {
         display: block;
     }
-    button {
+    .button {
         padding: 8px 16px;
         border: none;
         outline: none;

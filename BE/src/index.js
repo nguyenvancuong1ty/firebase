@@ -7,7 +7,6 @@ const routers = require("./routes");
 const app = express();
 app.use(cors());
 const port = 3000;
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/firebase/api/", routers);

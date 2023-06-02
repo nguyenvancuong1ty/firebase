@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ExclamationCircleFilled } from '@ant-design/icons';
-// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Cart from '~/Cart';
 import Search from '~/Search';
 import { reset, setCurrent } from '~/redux';
-import axios from 'axios';
 import { Modal } from 'antd';
+import Cart from '~/Cart';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 const { confirm } = Modal;
-function Header({ show, setShow }) {
+function Header(props) {
     const dispatch = useDispatch();
     const number = useSelector((state) => state.numberReducer.number);
-    const [isShowCart, setShowCart] = useState(false);
     const uid = localStorage.getItem('uid');
     const [data, setData] = useState([]);
     let number_product =
@@ -47,6 +45,7 @@ function Header({ show, setShow }) {
             onOk() {
                 localStorage.clear();
                 dispatch(reset());
+                props.setUid(null);
             },
             onCancel() {
                 console.log('Cancel');
@@ -103,7 +102,7 @@ function Header({ show, setShow }) {
                                         </div>
                                     </>
                                 ) : (
-                                    <div className="header__opstion--link" onClick={() => setShow(true)}>
+                                    <div className="header__opstion--link" onClick={() => props.setShow(true)}>
                                         <img
                                             src="https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/account-icon.webp"
                                             alt=""
@@ -116,10 +115,8 @@ function Header({ show, setShow }) {
                             <li
                                 className="header__opstion--item product__show"
                                 onClick={(e) => {
-                                    setShowCart(true);
-                                }}
-                                onMouseLeave={() => {
-                                    setShowCart(false);
+                                    e.stopPropagation();
+                                    props.setShowCart(true);
                                 }}
                             >
                                 <div to="/cart" className="header__opstion--link">
@@ -133,56 +130,10 @@ function Header({ show, setShow }) {
                                         <span className="number">{number}</span>
                                     </div>
                                 </div>
-                                {isShowCart && <Cart data={data} />}
+                                {props.showCart && <Cart data={data} />}
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div className="container__head">
-                    <ul className="grid wide container__head--navbar">
-                        <li className="head__navbar--item">
-                            <NavLink to="/" exact="true" className="home head__navbar--link">
-                                <b>Trang chủ</b>
-                            </NavLink>
-                        </li>
-                        <li className="head__navbar--item" id="intro">
-                            <NavLink to="/intro" className="head__navbar--link">
-                                <b>Giới thiệu</b>
-                            </NavLink>
-                        </li>
-                        <li className="head__navbar--item">
-                            <NavLink to="/cakes" className="head__navbar--link">
-                                <b>Cửa hàng bánh</b>
-                            </NavLink>
-                        </li>
-                        <li className="head__navbar--item">
-                            <NavLink to="/sale" className="head__navbar--link">
-                                <b> Chương trình khuyến mại </b>
-                            </NavLink>
-                        </li>
-                        <li className="head__navbar--item">
-                            <NavLink to="/recipe" className="head__navbar--link">
-                                <b>Công thức làm bánh</b>
-                            </NavLink>
-                        </li>
-                        <li className="head__navbar--item">
-                            <NavLink to="/news" className="head__navbar--link">
-                                <b>Tin tức</b>
-                            </NavLink>
-                        </li>
-                        <li className="head__navbar--item">
-                            <NavLink to="/contact" className="head__navbar--link">
-                                <b>Liên hệ</b>
-                            </NavLink>
-                        </li>
-                        {parseInt(localStorage.getItem('user_id')) === 138913 && (
-                            <li className="head__navbar--item">
-                                <NavLink to="/admin/manager/users" className="head__navbar--link">
-                                    <b>Quản lý</b>
-                                </NavLink>
-                            </li>
-                        )}
-                    </ul>
                 </div>
             </div>
             {/* <ToastContainer /> */}

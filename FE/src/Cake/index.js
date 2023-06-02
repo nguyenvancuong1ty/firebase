@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ExclamationCircleFilled } from '@ant-design/icons';
 import './Cake.css';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from 'antd';
@@ -39,7 +38,6 @@ function Cake({ item, setShow }) {
     const showConfirm = (cakeID) => {
         confirm({
             zIndex: 9999,
-            icon: <ExclamationCircleFilled />,
             title: 'Mua hàng',
             content: 'Thêm mặt hàng này vào giỏ hàng của bạn?',
             onOk() {

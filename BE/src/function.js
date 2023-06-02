@@ -9,24 +9,96 @@ const {
   addDoc,
   doc,
   getDoc,
-  setDoc,
-  onSnapshot,
 } = require("firebase/firestore");
 const {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   getAuth,
-  signInWithRedirect,
-  getRedirectResult,
 } = require("firebase/auth");
 const { db, auth } = require("./firebase");
-// const auth = require("./firebase");
-
-const { signInWithPopup, GoogleAuthProvider } = require("firebase/auth");
 const fs = require("fs");
 const path = require("path");
+
+const bcrypt = require("bcryptjs");
 // Create
 
+const addOrder = async (req, res) => {
+  try {
+    const list = [
+      "9W4hJVtmthd8f4L2FmCY",
+      "DuSw7deZWRah7lfShmlw",
+      "KTwNeB3uriEYjz5MgDzP",
+      "O05t1Nhfbyo2TqHVnBqw",
+      "O8fTY2mKKRB0aKFkpA7S",
+      "QFOi9cKmFdjpIBTTNmnY",
+      "eHhrYwyX8WBtNexzLdS8",
+      "hl8iBndqNO1nK8dkspTj",
+      "0i0bSGInltaOt33sWMh9",
+      "2tLZ0Q4dBMTpJZ5I7nYM",
+    ];
+    const filePath = path.join(__dirname, "data.json");
+    fs.readFile(filePath, "utf8", (err, data) => {
+      if (err) {
+        console.error("Error reading JSON file:", err);
+        res.status(500).send("Error reading JSON file");
+        return;
+      } else {
+        const jsonData = JSON.parse(data);
+        const newData = jsonData.order;
+        Array.isArray(newData) &&
+          newData.length > 0 &&
+          newData.map(async (item) => {
+            await addDoc(collection(db, "order"), {
+              id_user: list[Math.floor(Math.random() * 10)],
+              total_amount: Math.floor(Math.random() * 100000),
+              shipping_address: item.shipping_address,
+              status: item.status,
+              weight: Math.floor(Math.random() * 10 + 1),
+              shipping_cost: Math.floor(Math.random() * 10000),
+              order_date: Date.now(),
+              deleted: false,
+            });
+          });
+        return res.json("add data success");
+      }
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+  // Đọc tệp tin JSON
+};
+// Middleware
+const authenticateToken = async (req, res, next) => {
+  const token = req.headers.authorization;
+  if (!token) {
+    return res.status(401).json({ message: "Missing authentication token." });
+  }
+
+  try {
+    verifyIdToken(auth, token)
+      .then((decodedToken) => {
+        const uid = decodedToken.uid;
+        console.log(uid);
+
+        // Continue with the rest of your code
+        const users = 0;
+
+        if (users.length === 0) {
+          throw new Error("Invalid or expired token.");
+        }
+
+        req.user = users[0];
+        next();
+      })
+      .catch((error) => {
+        throw new Error("Invalid or expired token.");
+      });
+  } catch (error) {
+    console.log(error);
+    return res.status(403).json({ message: error.message });
+  }
+};
 const addCake = async (req, res) => {
   try {
     await addDoc(collection(db, "cart"), {
@@ -43,6 +115,44 @@ const addCake = async (req, res) => {
 };
 
 //Add cake by json file
+const addAccounts = async (req, res) => {
+  try {
+    const filePath = path.join(__dirname, "data.json");
+    fs.readFile(filePath, "utf8", (err, data) => {
+      if (err) {
+        console.error("Error reading JSON file:", err);
+        res.status(500).send("Error reading JSON file");
+        return;
+      } else {
+        const jsonData = JSON.parse(data);
+        const newData = jsonData.account;
+        Array.isArray(newData) &&
+          newData.length > 0 &&
+          newData.map(async (item) => {
+            const hash = bcrypt.hashSync(item.password, 8);
+            await addDoc(collection(db, "account"), {
+              username: item.username,
+              password: hash,
+              active: item.active,
+              fullName: item.fullName,
+              address: item.address,
+              age: item.age,
+              salary: item.salary,
+              type_account: item.type_account,
+              timeCreate: serverTimestamp(),
+              deleted: false,
+            });
+          });
+        return res.json("add data success");
+      }
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+  // Đọc tệp tin JSON
+};
+
 const addCakes = async (req, res) => {
   try {
     const filePath = path.join(__dirname, "data.json");
@@ -53,16 +163,18 @@ const addCakes = async (req, res) => {
         return;
       } else {
         const jsonData = JSON.parse(data);
-        Array.isArray(jsonData) &&
-          jsonData.length > 0 &&
-          jsonData.map(async (item) => {
+        const newData = jsonData.product;
+        Array.isArray(newData) &&
+          newData.length > 0 &&
+          newData.map(async (item) => {
             await addDoc(collection(db, "cakes"), {
               nameCake: item.nameCake,
               detail: item.detail,
-              price: item.price,
               quantity: item.quantity,
+              price: item.price,
               sold: item.sold,
               inventory: item.inventory,
+              weight: (Math.random() + 1).toFixed(2) * 1,
               images: item.images,
               timeCreate: serverTimestamp(),
               deleted: false,
@@ -137,23 +249,45 @@ const deleteCake = async (req, res) => {
   }
 };
 
+// const login = async (req, res) => {
+//   // connectAuthEmulator(auth, "http://localhost:9099");
+//   const { email, password } = req.body;
+//   await signInWithEmailAndPassword(auth, email, password)
+//     .then((userCredential) => {
+//       // Signed in
+//       const user = userCredential.user;
+//       return res.json({
+//         message: "login",
+//         data: user,
+//       });
+//       // ...
+//     })
+//     .catch((error) => {
+//       return res.status(401).json({ Error: error.message });
+//     });
+// };
 const login = async (req, res) => {
-  // connectAuthEmulator(auth, "http://localhost:9099");
   const { email, password } = req.body;
-  console.log(email, password);
-  await signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      return res.json({
-        message: "login",
-        data: user,
-      });
-      // ...
-    })
-    .catch((error) => {
-      return res.status(401).json({ Error: error.message });
+  const accountQuery = query(
+    collection(db, "account"),
+    where("username", "==", email),
+    where("password", "==", password)
+  );
+  const data = [];
+  const querySnapshot = await getDocs(accountQuery);
+  querySnapshot.docs.map(async (doc) => {
+    const account = doc.data();
+    data.push({ Id: doc.id, ...account });
+  });
+  if (Array.isArray(data) && data.length > 0) {
+    return res.json({
+      message: "login",
+      data: data[0],
     });
+    // ...
+  } else {
+    return res.status(401).json({ Error: "Invalid email or password" });
+  }
 };
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -170,28 +304,6 @@ const register = async (req, res) => {
       return res.json({ status: errorCode, message: errorMessage });
       // ..
     });
-};
-const loginWithGoogle = async () => {
-  const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-
-  try {
-    await signInWithRedirect(auth, provider);
-
-    // Handle the sign-in redirect result
-    const result = await getRedirectResult(auth);
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    const user = result.user;
-
-    console.log("Login success");
-    // Return the user or perform any necessary actions
-    return user;
-  } catch (error) {
-    console.log("Login failed", error.message);
-    // Handle any errors that occurred during the login process
-    throw error;
-  }
 };
 
 const getCartbyUser = async (req, res) => {
@@ -284,27 +396,6 @@ const deleteShallowCart = async (req, res) => {
   }
 };
 
-const change = async (req, res) => {
-  // const { id } = req.params;
-  // const q = query(
-  //   collection(db, "cart"),
-  //   where("uid", "==", "6aVaN7dlRJeqYb7DeamcUTowYxe2")
-  // );
-  // const unsubscribe = onSnapshot(q, (snapshot) => {
-  //   snapshot.docChanges().forEach((change) => {
-  //     if (change.type === "added") {
-  //       console.log("New city: ", change.doc.data());
-  //     }
-  //     if (change.type === "modified") {
-  //       console.log("Modified city: ", change.doc.data());
-  //     }
-  //     if (change.type === "removed") {
-  //       console.log("Removed city: ", change.doc.data());
-  //     }
-  //   });
-  // });
-};
-// change();
 module.exports = {
   getCake,
   addCake,
@@ -312,10 +403,12 @@ module.exports = {
   deleteCake,
   login,
   register,
-  loginWithGoogle,
   addCakes,
+  addAccounts,
   getCartbyUser,
+  authenticateToken,
   addToCart,
   updateCart,
   deleteShallowCart,
+  addOrder,
 };

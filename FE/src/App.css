@@ -17,6 +17,10 @@ body::-webkit-scrollbar {
 }
 
 .loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
 }
@@ -83,20 +87,18 @@ body::-webkit-scrollbar {
 
 .overlay-login {
     position: fixed;
+    max-width: 100% !important;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     z-index: 9999;
     animation: scale 0.4s linear;
 }
 
 .wrap {
-    width: 35%;
+    margin: 0 auto;
     height: 450px;
     background: white;
     padding: 36px 48px;
@@ -112,4 +114,133 @@ body::-webkit-scrollbar {
     height: 5px;
     background-color: aqua;
     width: 200px;
+}
+.bill-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.bill-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.bill-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bill-table th,
+.bill-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.bill-table th {
+    background-color: #f2f2f2;
+}
+
+.bill-total {
+    margin-top: 10px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.button-active {
+    background-color: rgb(13, 205, 87);
+    color: white;
+}
+
+.billing-container {
+}
+
+@keyframes showBilling {
+    from {
+        opacity: 0.5;
+        transform: translateX(50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+.billing-wrapper {
+    width: 900px;
+    max-width: 100%;
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    justify-content: center;
+    background-color: white;
+    animation: showBilling 0.4s linear;
+}
+
+.billing-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.billing-table th,
+.billing-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.billing-total {
+    margin-top: 20px;
+}
+
+.billing-customer-info,
+.billing-payment-method {
+    margin-top: 40px;
+}
+
+.billing-button {
+    margin-top: 40px;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.billing-button:hover {
+    background-color: #d32f2f;
+}
+.billing-total h3,
+.billing-customer-info h3,
+.billing-payment-method h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.billing-total {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.billing-customer-info,
+.billing-payment-method {
+    margin-top: 40px;
+}
+
+.billing-loader {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 249, 249, 1);
+    align-items: center;
+    justify-content: center;
+}
+.overlay-wrap {
+    margin-top: 60px !important;
 }
