@@ -4,6 +4,9 @@ import Home from './Homepage';
 import Header from './Header';
 
 import { useState } from 'react';
+import OrderPage from './Orderpage';
+import LoginCpn from './LoginCpn';
+import NotificationComponent from './Notification';
 
 function App() {
     const [show, setShow] = useState(false);
@@ -17,8 +20,11 @@ function App() {
                 <section style={{ height: 150 }}></section>
                 <Routes>
                     <Route path="/" element={<Home show={show} setShow={setShow} uid={uid} setUid={setUid}></Home>} />
+                    <Route path="/order" element={<OrderPage></OrderPage>} />
+                    <Route path="/notify" element={<NotificationComponent></NotificationComponent>} />
                 </Routes>
             </div>
+            {show && <LoginCpn setShow={setShow} setUid={setUid} />}
         </Router>
     );
 }

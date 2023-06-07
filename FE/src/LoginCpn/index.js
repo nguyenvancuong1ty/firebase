@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Checkbox, Form, Input } from 'antd';
 import axios from 'axios';
 import { Col, Container, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import Login from '~/Login';
 const LoginCpn = ({ setShow, setUid }) => {
+    const navigate = useNavigate();
     const onFinish = async (values) => {
         await axios({
             url: 'http://localhost:3000/firebase/api/login',
@@ -32,6 +34,9 @@ const LoginCpn = ({ setShow, setUid }) => {
     };
     const notifySuccess = () => {
         toast.success('Login success !', { position: toast.POSITION.TOP_CENTER });
+        setTimeout(() => {
+            navigate('/');
+        }, 1200);
     };
     return (
         <Container>

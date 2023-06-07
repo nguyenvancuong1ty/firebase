@@ -1,6 +1,9 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-// import { getFirestore } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
+import { getMessaging, onMessage } from 'firebase/messaging';
+
+
 const firebaseConfig = {
     apiKey: 'AIzaSyDcuDIddVQKAQoj0yMLrWsDTQDDAaAFY00',
     authDomain: 'fir-44abd.firebaseapp.com',
@@ -11,6 +14,8 @@ const firebaseConfig = {
     appId: '1:513391440326:web:1c076486af50e8572742c7',
 };
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-// const db = getFirestore(app);
-export const provider = new GoogleAuthProvider();
+const auth = getAuth(app);
+const db = getFirestore(app);
+const messaging = getMessaging(app);
+const provider = new GoogleAuthProvider();
+export { auth, db, messaging, provider, onMessage };

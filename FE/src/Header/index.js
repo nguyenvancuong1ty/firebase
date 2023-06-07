@@ -1,5 +1,5 @@
 import './Header.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,6 +15,7 @@ function Header(props) {
     const number = useSelector((state) => state.numberReducer.number);
     const uid = localStorage.getItem('uid');
     const [data, setData] = useState([]);
+    const navigate = useNavigate();
     let number_product =
         Array.isArray(data) && data.length > 0
             ? data.reduce((init, item) => {
@@ -46,6 +47,7 @@ function Header(props) {
                 localStorage.clear();
                 dispatch(reset());
                 props.setUid(null);
+                navigate('/');
             },
             onCancel() {
                 console.log('Cancel');
@@ -58,11 +60,13 @@ function Header(props) {
             <div className="container">
                 <div className="row header">
                     <div className="col-xl-3">
-                        <img
-                            src="https://theme.hstatic.net/200000460475/1000990214/14/logo.png?v=127"
-                            alt=""
-                            className="logo"
-                        />
+                        <NavLink to="/">
+                            <img
+                                src="https://theme.hstatic.net/200000460475/1000990214/14/logo.png?v=127"
+                                alt=""
+                                className="logo"
+                            />
+                        </NavLink>
                     </div>
                     <div className="col-xl-5">
                         <Search />
@@ -70,7 +74,7 @@ function Header(props) {
                     <div className="col-xl-4">
                         <ul className="header__opstion">
                             <li className="order header__opstion--item">
-                                <NavLink to="/intro" className="header__opstion--link">
+                                <NavLink to="/order" className="header__opstion--link">
                                     <img
                                         src="https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/order-icon.webp"
                                         alt=""
@@ -80,7 +84,7 @@ function Header(props) {
                                 </NavLink>
                             </li>
                             <li className="shop header__opstion--item">
-                                <NavLink to="/shop" className="header__opstion--link">
+                                <NavLink to="/notify" className="header__opstion--link">
                                     <img
                                         src="https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/address-icon.webp"
                                         alt=""

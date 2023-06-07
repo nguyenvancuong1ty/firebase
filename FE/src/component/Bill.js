@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Button, DatePicker, Modal, Space, Spin } from 'antd';
+import React, { memo, useEffect, useState } from 'react';
+import { Button, DatePicker, Empty, Modal, Space, Spin } from 'antd';
 import { ToastContainer, toast } from 'react-toastify';
+
 import axios from 'axios';
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
     const [data, setData] = useState(items);
     const [buttonActive, setButtonActive] = useState(3);
-
     useEffect(() => {
         setData(items);
     }, [items]);
@@ -113,6 +113,30 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
             onCancel() {},
         });
     };
+    const handleCancel = (item) => {
+        confirm({
+            zIndex: 9999,
+            title: 'Hủy đơn hàng',
+            content: 'Bạn muốn hủy giao đơn hàng ?',
+            onOk() {
+                setLoading(true);
+                axios({
+                    url: `http://localhost:3000/firebase/api/order?id=${item.Id}&status=pending`,
+                    method: 'patch',
+                })
+                    .then(() => {
+                        const newData = items.filter((data) => {
+                            return data.Id !== item.Id;
+                        });
+                        setDataUser(newData);
+                        setLoading(false);
+                        toast.success('Hủy thành công, hãy chú ý lần sau !', { position: toast.POSITION.TOP_CENTER });
+                    })
+                    .catch(() => {});
+            },
+            onCancel() {},
+        });
+    };
     return (
         <div className="bill-container">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -157,6 +181,7 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
                 </Space>
             </div>
             <table className="bill-table">
+                {console.log('re-render')}
                 <thead>
                     <tr>
                         <th>Order total (excluding shipping)</th>
@@ -172,9 +197,10 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {!loading &&
+                    {!loading && Array.isArray(data) && data.length > 0 ? (
                         data.map((item) => (
                             <tr key={item.Id}>
+                                {/* {console.log(item)} */}
                                 <td>{(item.total_amount - item.shipping_cost).toLocaleString('en-US')}đ</td>
                                 <td>{item.shipping_cost.toLocaleString('en-US')}đ</td>
                                 <td>{item.total_amount.toLocaleString('en-US')}đ</td>
@@ -196,6 +222,7 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
                                         </td>
                                         <td>
                                             <Button onClick={() => handleComplete(item)}>Hoàn thành</Button>
+                                            <Button onClick={() => handleCancel(item)}>Hủy</Button>
                                         </td>
                                     </>
                                 )}
@@ -206,19 +233,27 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
                                     </>
                                 )}
                             </tr>
-                        ))}
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan={8}>
+                                <Empty />
+                            </td>
+                        </tr>
+                    )}
                 </tbody>
-                {loading && (
-                    <Space className="billing-loader">
-                        <Spin tip="Loading..." size="large">
-                            <div className="content" style={{ marginRight: 50 }} />
-                        </Spin>
-                    </Space>
-                )}
             </table>
+            {loading && (
+                <Space className="billing-loader">
+                    <Spin tip="Loading..." size="large">
+                        <span className="content" style={{ marginRight: 50 }} />
+                    </Spin>
+                </Space>
+            )}
+
             <ToastContainer autoClose={1000} />
         </div>
     );
 };
 
-export default Bill;
+export default memo(Bill);
