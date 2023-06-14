@@ -2,8 +2,8 @@ const { db, auth, Timestamp, messaging } = require('./firebase');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { getMessaging } = require('firebase/messaging');
 // Create
 
 const authenticateToken = async (req, res, next) => {
@@ -37,11 +37,11 @@ const authenticateToken = async (req, res, next) => {
     }
 };
 
-const getCake = async (req, res) => {
+const getProduct = async (req, res) => {
     try {
-        const cakesRef = db.collection('cakes');
+        const cakesRef = db.collection('products');
         // const querySnapshot = await getDocs(query(cakesRef, where('deleted', '==', false)));
-        const querySnapshot = await cakesRef.where('deleted', '==', false).get();
+        const querySnapshot = await cakesRef.where('deleted', '==', false).where('type', '==', req.query.type).get();
         const data = [];
         querySnapshot.forEach((doc) => {
             const cake = doc.data();
@@ -71,13 +71,60 @@ const login = async (req, res) => {
         data.push({ Id: doc.id, ...account });
     });
     if (Array.isArray(data) && data.length > 0 && bcrypt.compareSync(password, data[0].password)) {
+        const accessToken = jwt.sign({ email: email, role: data[0].type_account }, 'shhhhh', {
+            expiresIn: '10m',
+        });
+        const refreshToken = jwt.sign({ email: email, role: data[0].type_account }, 'shhhhh', {
+            expiresIn: '7d',
+        });
+        res.cookie('refreshToken', refreshToken, { httpOnly: true });
         return res.json({
             message: 'login',
             data: data[0],
+            accessToken: accessToken,
         });
         // ...
     } else {
         return res.status(401).json({ Error: 'Invalid email or password' });
+    }
+};
+
+const handleLoginWithGoogle = async (req, res) => {
+    const { uid, email, displayName } = req.body;
+    const data = {
+        email: email,
+        password: bcrypt.hashSync(uid + email, 8),
+        type_account: 'customer',
+        active: true,
+        fullName: displayName,
+        address: '',
+        age: 18,
+        salary: 0,
+        deleted: false,
+        timeCreate: Timestamp.fromDate(new Date()),
+    };
+    try {
+        const accessToken = jwt.sign({ email: email, role: data.type_account }, 'shhhhh', {
+            expiresIn: '10s',
+        });
+        const refreshToken = jwt.sign({ email: email, role: data.type_account }, 'shhhhh', {
+            expiresIn: '7d',
+        });
+        const accountRef = db.collection('account').doc(uid);
+        const doc = await accountRef.get();
+        if (!doc.exists) {
+            await db.collection('account').doc(uid).set(data);
+        }
+        res.cookie('refreshToken', refreshToken, { httpOnly: true });
+        console.log('ok');
+        return res.json({
+            message: 'login success',
+            accessToken: accessToken,
+            address: data.address,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.json(error);
     }
 };
 
@@ -90,7 +137,7 @@ const getCartbyUser = async (req, res) => {
         await Promise.all(
             querySnapshot.docs.map(async (doc2) => {
                 const cartItem = doc2.data();
-                const cakeDoc = await db.collection('cakes').doc(cartItem.cakeID).get();
+                const cakeDoc = await db.collection('products').doc(cartItem.cakeID).get();
                 const cakeData = cakeDoc.data();
                 data.push({ ...cartItem, cake: { ...cakeData }, id: doc2.id });
             }),
@@ -346,28 +393,38 @@ const notifyForOrder = async (req, res) => {
     if (req.body.status === 'shipping') {
         const message = {
             notification: {
-                title: 'Đơn hàng',
+                title: 'Giao hàng',
                 body: `Đơn hàng ${req.body.id} đã có người nhận giao...`,
             },
             token: req.body.token,
         };
 
         messaging.send(message);
-    }
-    if (req.body.status === 'pending') {
+    } else if (req.body.status === 'pending') {
         const message = {
             notification: {
-                title: 'Đơn hàng',
+                title: 'Hủy hàng',
                 body: `shipper đã hủy giao đơn hàng ${req.body.id}`,
             },
             token: req.body.token,
         };
 
         messaging.send(message);
+    } else {
+        const message = {
+            notification: {
+                title: 'Nhận hàng',
+                body: `Đơn hàng  ${req.body.id} sắp đến hãy chuẩn bị nhận.`,
+            },
+            token: req.body.token,
+        };
+
+        messaging.send(message);
     }
+    console.log('send notify');
 };
 module.exports = {
-    getCake,
+    getProduct,
     login,
     addOrder,
     getCartbyUser,
@@ -382,4 +439,5 @@ module.exports = {
     updateOrder,
     getOrderForCustomer,
     notifyForOrder,
+    handleLoginWithGoogle,
 };
