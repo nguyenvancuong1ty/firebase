@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { client } = require('./middleware/cache');
 // Create
 
 const authenticateToken = async (req, res, next) => {
@@ -38,6 +39,7 @@ const authenticateToken = async (req, res, next) => {
 };
 
 const getProduct = async (req, res) => {
+    console.log('no');
     try {
         const cakesRef = db.collection('products');
         // const querySnapshot = await getDocs(query(cakesRef, where('deleted', '==', false)));
@@ -51,14 +53,41 @@ const getProduct = async (req, res) => {
             };
             data.push(cakeWithDocId);
         });
-
+        await client.set('__express__' + (req.originalUrl || req.url), JSON.stringify(data));
+        await client.disconnect();
         return res.json({
             count: data.length,
             userAgent: req.header('User-Agent'),
             data: data,
         });
     } catch (e) {
-        return res.json(e.message);
+        return res.status(500).json({ error: e.message });
+    }
+};
+
+const getAllProduct = async (req, res) => {
+    try {
+        const cakesRef = db.collection('products');
+        // const querySnapshot = await getDocs(query(cakesRef, where('deleted', '==', false)));
+        const querySnapshot = await cakesRef.where('deleted', '==', false).get();
+        const data = [];
+        querySnapshot.forEach((doc) => {
+            const cake = doc.data();
+            const cakeWithDocId = {
+                Id: doc.id,
+                ...cake,
+            };
+            data.push(cakeWithDocId);
+        });
+        await client.set('__express__' + (req.originalUrl || req.url), JSON.stringify(data));
+        await client.disconnect();
+        return res.json({
+            count: data.length,
+            userAgent: req.header('User-Agent'),
+            data: data,
+        });
+    } catch (e) {
+        return res.status(500).json({ error: e.message });
     }
 };
 
@@ -362,19 +391,20 @@ const getNewOrder = async (req, res) => {
     }
 };
 
-const distance = (req, res) => {
+const distance = async (req, res) => {
     const apiKey = 'AIzaSyAzaga_IWnHVoBVEMGXazTE3HbFZ_uBkg4';
     const origin = req.query.origin;
     const destination = req.query.destination;
     const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin}&destinations=${destination}&key=${apiKey}`;
-    axios
+    await axios
         .get(url)
         .then((response) => {
             res.header('Access-Control-Allow-Origin', '*');
-            res.json(response.data.rows[0].elements[0].distance.value);
+            console.log(response);
+            return res.json(response.data.rows[0].elements[0].distance.value);
         })
-        .catch((error) => {
-            res.status(500).json({ error: 'Đã xảy ra lỗi', status: error });
+        .catch((e) => {
+            res.status(500).json({ error: 'Đã xảy ra lỗi', status: e });
         });
 };
 
@@ -440,4 +470,5 @@ module.exports = {
     getOrderForCustomer,
     notifyForOrder,
     handleLoginWithGoogle,
+    getAllProduct,
 };

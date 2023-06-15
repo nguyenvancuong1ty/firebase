@@ -33,13 +33,9 @@ const refreshToken = (req, res) => {
                 }
 
                 // Tạo mới Access Token
-                const accessToken = jwt.sign(
-                    { email: decoded.email, role: req.query.type_account },
-                    secretKey,
-                    {
-                        expiresIn: '30m',
-                    },
-                );
+                const accessToken = jwt.sign({ email: decoded.email, role: req.query.type_account }, secretKey, {
+                    expiresIn: '30m',
+                });
                 return res.json({ accessToken });
             });
         }

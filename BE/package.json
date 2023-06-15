@@ -32,6 +32,7 @@
         "swagger-ui-express": "^4.6.3"
     },
     "devDependencies": {
+        "babel-loader": "^9.1.2",
         "webpack": "^5.84.1",
         "webpack-cli": "^5.1.1"
     }

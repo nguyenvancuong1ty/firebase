@@ -20,6 +20,11 @@ app.use(cookieParser());
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+//Redis
+
+//Redis
+
 app.use('/firebase/api/', routers);
 
 app.listen(port, () => {

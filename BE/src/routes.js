@@ -17,16 +17,18 @@ const {
     updateCart,
     handleLoginWithGoogle,
     getProduct,
+    getAllProduct,
 } = require('./api');
 const { getDistance } = require('./middleware/getDistance');
 const { authentication, refreshToken } = require('./middleware/authentication');
 const authorization = require('./middleware/authorization');
+const { cache } = require('./middleware/cache');
 const router = express.Router();
 router.get('/', (req, res) => {
     res.send('<h1>Chào chúng mày</h1>');
 });
 
-router.get('/cake', getProduct);
+router.get('/cake', cache, getProduct);
 router.post('/cake', addCake);
 router.patch('/cake', updateCake);
 router.delete('/cake', deleteCake);
@@ -59,4 +61,6 @@ router.post('/subscribeToTopic', addAccountToListNotify);
 router.post('/notifyForOrder', notifyForOrder);
 
 router.post('/refreshToken', refreshToken);
+
+router.get('/search', cache, getAllProduct);
 module.exports = router;
