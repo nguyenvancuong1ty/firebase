@@ -39,7 +39,6 @@ const authenticateToken = async (req, res, next) => {
 };
 
 const getProduct = async (req, res) => {
-    console.log('no');
     try {
         const cakesRef = db.collection('products');
         // const querySnapshot = await getDocs(query(cakesRef, where('deleted', '==', false)));
@@ -53,8 +52,11 @@ const getProduct = async (req, res) => {
             };
             data.push(cakeWithDocId);
         });
-        await client.set('__express__' + (req.originalUrl || req.url), JSON.stringify(data));
-        await client.disconnect();
+        if (client.isOpen) {
+            await client.set('__express__' + (req.originalUrl || req.url), JSON.stringify(data));
+            await client.disconnect();
+        }
+
         return res.json({
             count: data.length,
             userAgent: req.header('User-Agent'),
@@ -79,8 +81,10 @@ const getAllProduct = async (req, res) => {
             };
             data.push(cakeWithDocId);
         });
-        await client.set('__express__' + (req.originalUrl || req.url), JSON.stringify(data));
-        await client.disconnect();
+        if (client.isOpen) {
+            await client.set('__express__' + (req.originalUrl || req.url), JSON.stringify(data));
+            await client.disconnect();
+        }
         return res.json({
             count: data.length,
             userAgent: req.header('User-Agent'),

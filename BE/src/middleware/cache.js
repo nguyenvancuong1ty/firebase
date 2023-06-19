@@ -1,9 +1,12 @@
 const { createClient } = require('redis');
 
 const client = createClient();
-client.on('error', (err) => console.log('Redis Client Error', err));
+
 const cache = async (req, res, next) => {
     try {
+        client.on('error', (err) => {
+            console.log('Redis Client Error', err);
+        });
         !client.isOpen && (await client.connect());
         const key = '__express__' + (req.originalUrl || req.url);
         console.log(key);
@@ -20,8 +23,9 @@ const cache = async (req, res, next) => {
             next();
         }
     } catch (error) {
-        console.log(error);
-        await client.disconnect();
+        console.log(error, 'lỗi');
+        client.isOpen && (await client.disconnect());
+        next();
     }
 };
 const deleteCache = async () => {
