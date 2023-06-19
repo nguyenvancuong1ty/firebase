@@ -18,13 +18,11 @@ function useAxios({ url, method, authentication, input }) {
                 .then((res) => {
                     setTimeout(() => {
                         setLoading(false);
-                    }, 500);
+                    }, 200);
                     Array.isArray(res) ? setData(res) : setData([res]);
                 })
                 .catch((e) => {
-                    setTimeout(() => {
-                        setLoading(false);
-                    }, 500);
+                    setLoading(false);
                     console.log(e.message);
                 });
         };

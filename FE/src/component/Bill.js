@@ -218,7 +218,9 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
                                 {type === 'shipping' && (
                                     <>
                                         <td>
-                                            {new Date(item.start_shipping_date.seconds * 1000).toString().slice(0, -26)}
+                                            {new Date(item.start_shipping_date._seconds * 1000)
+                                                .toString()
+                                                .slice(0, -26)}
                                         </td>
                                         <td>
                                             <Button onClick={() => handleComplete(item)}>Hoàn thành</Button>
@@ -228,7 +230,7 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
                                 )}
                                 {type === 'shipped' && (
                                     <>
-                                        <td>{new Date(item.shipped_date.seconds * 1000).toString().slice(0, -26)}</td>
+                                        <td>{new Date(item.shipped_date._seconds * 1000).toString().slice(0, -26)}</td>
                                         <td>{item.status}</td>
                                     </>
                                 )}
@@ -244,7 +246,7 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
                 </tbody>
             </table>
             {loading && (
-                <Space className="billing-loader">
+                <Space className="billing-loader" style={{ zIndex: 99 }}>
                     <Spin tip="Loading..." size="large">
                         <span className="content" style={{ marginRight: 50 }} />
                     </Spin>

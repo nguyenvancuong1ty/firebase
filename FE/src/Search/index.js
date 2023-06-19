@@ -1,64 +1,58 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import './Search.scss'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Search.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { Empty } from 'antd';
 function Search() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isShow, setShow] = useState(false);
     const [textInput, setTextInput] = useState('');
-    const [textSearch, setTextSearch] = useState('');
+
     useEffect(() => {
-        if(textSearch.trim().length <= 0 ) {
-            return;
-        }
+        window.addEventListener('click', () => {
+            setShow(false);
+        });
+    }, []);
+    const handleSearch = (e) => {
+        setShow(false);
+        setTextInput(e.target.value);
+    };
+    const go = () => {
         setLoading(true);
         const fetchData = async () => {
             await axios({
-                method: 'post',
-                url: `https://cakebyme.shop:3000/v1/api/search`,
-                data : {
-                    name: textSearch
-                }
+                method: 'get',
+                url: `http://localhost:3000/firebase/api/search`,
             })
                 .then((res) => {
-                    setData(res.data.data);
+                    const newData = res.data.data.filter((item) => {
+                        return item.name.toLowerCase().includes(textInput.replace(/\s/g, ''));
+                    });
+                    setData(newData);
+                    setTimeout(() => {
+                        setShow(true);
+                    }, 200);
                     setLoading(false);
                 })
                 .catch((err) => {
                     console.log('error:', err);
                     setLoading(false);
                 });
-            };
-                fetchData();
-    },[textSearch]);
-
-    useEffect(() => {
-        window.addEventListener('click', () => {
-            setShow(false);
-        })
-    }, [])
-    const handleSearch = (e) => {
-        setShow(false);
-        setTextInput(e.target.value); 
-    }
+        };
+        fetchData();
+    };
     const handleKeyUp = (e) => {
-        if(e.key === "Enter") {
-            setTextSearch(textInput);
-            setTimeout(() => {
-                setShow(true);
-            }, 200);
+        if (e.key === 'Enter') {
+            go();
         }
-    }
+    };
 
     const searchClick = () => {
-            setTextSearch(textInput);
-            setTimeout(() => {
-                setShow(true);
-            }, 200);
-    }   
+        go();
+    };
     return (
         <>
             <div className="header-input">
@@ -78,7 +72,8 @@ function Search() {
                     <span className="loader"></span>
                 </div>
                 {isShow ? (
-                    data.length > 0 ? (
+                    Array.isArray(data) &&
+                    (data.length > 0 ? (
                         <div className="search">
                             {data.map((item, index) => (
                                 <Link
@@ -93,12 +88,9 @@ function Search() {
                                 >
                                     <img src={item.images} alt="" />
                                     <div className="content">
-                                        <b>{item.nameCake}</b>
+                                        <b>{item.name}</b>
                                         <div>
-                                            <h1>
-                                                Giá:{' '}
-                                                {(item.price - (item.price * item.sale) / 100).toLocaleString('en-US')}
-                                            </h1>
+                                            <h1>Giá: {item.price.toLocaleString('en-US')}</h1>
                                             <b>{item.total_quantity}</b>
                                         </div>
                                     </div>
@@ -106,8 +98,10 @@ function Search() {
                             ))}
                         </div>
                     ) : (
-                        <div className="search no-product">Không có sản phẩm phù hợp</div>
-                    )
+                        <div className="search no-product">
+                            <Empty></Empty>
+                        </div>
+                    ))
                 ) : (
                     <div></div>
                 )}

@@ -1,10 +1,10 @@
 import './Header.css';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import 'react-toastify/dist/ReactToastify.css';
 import Search from '~/Search';
-import { reset, setCurrent } from '~/redux';
+import { reset, setCurrent, setDataCart, setTypeProduct } from '~/redux';
 import { Modal } from 'antd';
 import Cart from '~/Cart';
 import { useEffect, useState } from 'react';
@@ -13,25 +13,29 @@ const { confirm } = Modal;
 function Header(props) {
     const dispatch = useDispatch();
     const number = useSelector((state) => state.numberReducer.number);
+    const dataCart = useSelector((state) => state.dataCartReducer.dataCart);
     const uid = localStorage.getItem('uid');
-    const [data, setData] = useState([]);
-    const navigate = useNavigate();
+    const [active, setActive] = useState(1);
     let number_product =
-        Array.isArray(data) && data.length > 0
-            ? data.reduce((init, item) => {
+        Array.isArray(dataCart) && dataCart.length > 0
+            ? dataCart.reduce((init, item) => {
                   return init + item.quantity;
               }, 0)
             : 0;
     useEffect(() => {
         dispatch(setCurrent(number_product));
     }, [number_product]);
+    const navigate = useNavigate();
     useEffect(() => {
         axios({
             url: `http://localhost:3000/firebase/api/cart/${uid}`,
             method: 'get',
         })
             .then((res) => {
-                setData(res.data.data);
+                const newData = res.data.data.sort((a, b) => {
+                    return a.cake.price - b.cake.price;
+                });
+                dispatch(setDataCart(newData));
             })
             .catch((e) => alert(e.message));
     }, [uid, number]);
@@ -84,7 +88,7 @@ function Header(props) {
                                 </NavLink>
                             </li>
                             <li className="shop header__opstion--item">
-                                <NavLink to="/notify" className="header__opstion--link">
+                                <NavLink to="/shop" className="header__opstion--link">
                                     <img
                                         src="https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/address-icon.webp"
                                         alt=""
@@ -134,10 +138,87 @@ function Header(props) {
                                         <span className="number">{number}</span>
                                     </div>
                                 </div>
-                                {props.showCart && <Cart data={data} />}
+                                {props.showCart && <Cart uid={uid} dataCart={dataCart} />}
                             </li>
                         </ul>
                     </div>
+                </div>
+                <div className="container__head">
+                    <ul className="grid wide container__head--navbar">
+                        <Link
+                            to="/"
+                            onClick={() => {
+                                dispatch(setTypeProduct('cake'));
+                                setActive(1);
+                            }}
+                            className={active === 1 ? 'head__navbar--item active' : 'head__navbar--item'}
+                            id="intro"
+                        >
+                            <div className="head__navbar--link">
+                                <b>Bánh</b>
+                            </div>
+                        </Link>
+                        <Link
+                            to="/"
+                            onClick={() => {
+                                dispatch(setTypeProduct('candy'));
+                                setActive(2);
+                            }}
+                            className={active === 2 ? 'head__navbar--item active' : 'head__navbar--item'}
+                        >
+                            <div className="head__navbar--link">
+                                <b>Kẹo</b>
+                            </div>
+                        </Link>
+                        <Link
+                            to="/"
+                            onClick={() => {
+                                dispatch(setTypeProduct('houseware'));
+                                setActive(3);
+                            }}
+                            className={active === 3 ? 'head__navbar--item active' : 'head__navbar--item'}
+                        >
+                            <div className="head__navbar--link">
+                                <b>Đồ gia dụng </b>
+                            </div>
+                        </Link>
+                        <Link
+                            to="/"
+                            onClick={() => {
+                                dispatch(setTypeProduct('electronic device'));
+                                setActive(4);
+                            }}
+                            className={active === 4 ? 'head__navbar--item active' : 'head__navbar--item'}
+                        >
+                            <div className="head__navbar--link">
+                                <b>Đồ điện tử</b>
+                            </div>
+                        </Link>
+                        <Link
+                            to="/"
+                            onClick={() => {
+                                dispatch(setTypeProduct('smart device'));
+                                setActive(5);
+                            }}
+                            className={active === 5 ? 'head__navbar--item active' : 'head__navbar--item'}
+                        >
+                            <div className="head__navbar--link">
+                                <b>Thiết bị thông minh</b>
+                            </div>
+                        </Link>
+                        <Link
+                            to="/"
+                            onClick={() => {
+                                dispatch(setTypeProduct('clothes'));
+                                setActive(6);
+                            }}
+                            className={active === 6 ? 'head__navbar--item active' : 'head__navbar--item'}
+                        >
+                            <div className="head__navbar--link">
+                                <b>Quần áo</b>
+                            </div>
+                        </Link>
+                    </ul>
                 </div>
             </div>
             {/* <ToastContainer /> */}

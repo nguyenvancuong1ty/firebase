@@ -3,15 +3,19 @@ import './Cart.scss';
 import { Checkbox, Empty, Modal, message } from 'antd';
 import Quantity from '~/component/Quantity';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Billing from '~/component/Billing';
 import { ToastContainer, toast } from 'react-toastify';
-function Cart(props) {
+import { useDispatch, useSelector } from 'react-redux';
+import { setDataCart } from '~/redux';
+function Cart({ dataCart, uid }) {
     const { confirm } = Modal;
+    const dispatch = useDispatch();
+    const totalCoin = useSelector((state) => state.totalCoinReducer.totalCoin);
     const [messageApi, contextHolder2] = message.useMessage();
     const [checkOut, setCheckOut] = useState([]);
     const [showBilling, setShowBilling] = useState(false);
-    const [total, setTotal] = useState(0);
+
     const handleDelete = (item) => {
         confirm({
             zIndex: 9999,
@@ -22,7 +26,7 @@ function Cart(props) {
             content: 'Xóa mặt hàng này vào giỏ hàng của bạn?',
             onOk() {
                 axios({
-                    url: `http://localhost:3000/firebase/api/cart?id_cart=${item.id}`,
+                    url: `http://localhost:3000/firebase/api/cart/${item.id}`,
                     method: 'patch',
                 })
                     .then(() => {
@@ -53,31 +57,35 @@ function Cart(props) {
             });
             setCheckOut(newItem);
         }
+        axios({
+            url: `http://localhost:3000/firebase/api/cart/${localStorage.getItem('uid')}`,
+            method: 'get',
+        })
+            .then((res) => {
+                const newData = res.data.data.sort((a, b) => {
+                    return a.cake.price - b.cake.price;
+                });
+                dispatch(setDataCart(newData));
+            })
+            .catch((e) => alert(e.message));
     };
-    useEffect(() => {
-        Array.isArray(checkOut) &&
-            setTotal(
-                checkOut.reduce((init, item) => {
-                    return init + item.cake.price * item.quantity;
-                }, 0),
-            );
-    }, [checkOut]);
+    console.log(dataCart);
     return (
         <>
             <div className="wrap_cart">
                 {contextHolder2}
-                {props.data && props.data.length > 0 ? (
+                {Array.isArray(dataCart) && dataCart.length > 0 ? (
                     <>
-                        {props.data.map((item, index) => (
+                        {dataCart.map((item, index) => (
                             <div className="items" key={index}>
                                 <Checkbox onChange={(e) => onChange(e, item)}></Checkbox>
                                 <img className="images" src={item.cake.images} alt="" />
                                 <div className="content">
-                                    <b>{item.cake.nameCake}</b>
+                                    <b>{item.cake.name}</b>
                                     <div>
                                         <div className="price">Giá: {item.cake.price.toLocaleString('en-US')}</div>
 
-                                        <Quantity item={item} setTotal={setTotal} checkOut={checkOut} />
+                                        <Quantity item={item} checkOut={checkOut} />
                                     </div>
                                 </div>
                                 <button className="delete" onClick={() => handleDelete(item)}>
@@ -88,7 +96,7 @@ function Cart(props) {
 
                         <footer>
                             <b className="total_price">
-                                Tổng tiền tạm tính: <b>{total.toLocaleString('en-US')}đ</b>
+                                Tổng tiền tạm tính: <b>{totalCoin.toLocaleString('en-US')}đ</b>
                             </b>
                             (Chưa bao gồm phí ship) <br />
                             <button
@@ -104,7 +112,7 @@ function Cart(props) {
                                 Tiến hành Đặt hàng
                             </button>
                         </footer>
-                        {showBilling && <Billing product={checkOut} total={total} />}
+                        {showBilling && <Billing product={checkOut} total={totalCoin} />}
                         <ToastContainer autoClose={1000} />
                     </>
                 ) : (

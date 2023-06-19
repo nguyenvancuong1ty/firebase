@@ -4,6 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { db } from '~/firebase';
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 const OrderPage = () => {
@@ -15,6 +17,9 @@ const OrderPage = () => {
         axios({
             method: 'get',
             url: `http://localhost:3000/firebase/api/order-for-customer?id=${localStorage.getItem('uid')}`,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
         }).then((res) => {
             setData(res.data.data);
             setDataFilter(res.data.data);
@@ -26,7 +31,32 @@ const OrderPage = () => {
             return total + item.total_amount;
         }, 0);
     };
+    useEffect(() => {
+        setLoading(true);
+        const ordersRef = collection(db, 'order');
+        const queryRef = query(
+            ordersRef,
+            where('deleted', '==', false),
+            where('user_order', '==', localStorage.getItem('uid')),
+        );
 
+        const unsubscribe = onSnapshot(queryRef, (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+                if (change.type === 'added' && change.doc.exists()) {
+                } else if (change.type === 'removed') {
+                } else if (change.type === 'modified') {
+                    const newOrder = data.filter((item) => {
+                        return item.Id !== change.doc.id;
+                    });
+                    setData([...newOrder, { Id: change.doc.id, ...change.doc.data() }]);
+                }
+            });
+
+            setLoading(false);
+        });
+
+        return () => unsubscribe();
+    }, [data]);
     const TotalShippingCost = () => {
         return data.reduce((total, item) => {
             return total + item.shipping_cost;
@@ -127,16 +157,19 @@ const OrderPage = () => {
                                     <td>{item.weight}kg</td>
                                     <td>{item.shipping_address}</td>
                                     <td>394 Mỹ Đình 1, Hà Nội</td>
+                                    {console.log(item)}
                                     {item.status === 'pending' && (
-                                        <td>{new Date(item.order_date.seconds * 1000).toString().slice(0, -26)}</td>
+                                        <td>{new Date(item.order_date._seconds * 1000).toString().slice(0, -26)}</td>
                                     )}
                                     {item.status === 'shipping' && (
                                         <td>
-                                            {new Date(item.start_shipping_date.seconds * 1000).toString().slice(0, -26)}
+                                            {new Date(item.start_shipping_date._seconds * 1000)
+                                                .toString()
+                                                .slice(0, -26)}
                                         </td>
                                     )}
                                     {item.status === 'shipped' && (
-                                        <td>{new Date(item.shipped_date.seconds * 1000).toString().slice(0, -26)}</td>
+                                        <td>{new Date(item.shipped_date._seconds * 1000).toString().slice(0, -26)}</td>
                                     )}
                                     <td>{item.status}</td>
                                     <td>

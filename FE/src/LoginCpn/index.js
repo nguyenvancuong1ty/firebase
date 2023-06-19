@@ -1,12 +1,14 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Checkbox, Form, Input } from 'antd';
 import axios from 'axios';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import Login from '~/Login';
+import LoginFacebook from '~/LoginFacebook';
+import LoginGithub from '~/LoginGithub';
+import LoginGoogle from '~/LoginGoogle';
 const LoginCpn = ({ setShow, setUid }) => {
     const navigate = useNavigate();
     const onFinish = async (values) => {
@@ -14,6 +16,7 @@ const LoginCpn = ({ setShow, setUid }) => {
             url: 'http://localhost:3000/firebase/api/login',
             method: 'POST',
             data: values,
+            withCredentials: true,
         })
             .then((res) => {
                 notifySuccess();
@@ -21,6 +24,7 @@ const LoginCpn = ({ setShow, setUid }) => {
                 setUid(res.data.data.Id);
                 localStorage.setItem('address', res.data.data.address);
                 localStorage.setItem('account', res.data.data.type_account);
+                localStorage.setItem('token', res.data.accessToken);
                 setTimeout(() => {
                     setShow(false);
                 }, 1000);
@@ -86,6 +90,7 @@ const LoginCpn = ({ setShow, setUid }) => {
                                     prefix={<LockOutlined className="site-form-item-icon" />}
                                     type="password"
                                     placeholder="Password"
+                                    current-password="true"
                                 />
                             </Form.Item>
                             <Form.Item>
@@ -98,9 +103,9 @@ const LoginCpn = ({ setShow, setUid }) => {
                                 </a>
                             </Form.Item>
                             <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '100% ' }}>
-                                <FontAwesomeIcon icon={faFacebook} style={{ color: '#0052e0' }} size="2xl" />
-                                <Login setShow={setShow} />
-                                <FontAwesomeIcon icon={faTwitter} style={{ color: '#0087db' }} size="2xl" />
+                                <LoginFacebook setShow={setShow} setUid={setUid} />
+                                <LoginGoogle setShow={setShow} setUid={setUid} />
+                                <LoginGithub setShow={setShow} setUid={setUid} />
                             </div>
                             <Form.Item
                                 style={{

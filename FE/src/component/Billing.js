@@ -66,7 +66,7 @@ const Billing = ({ product, total }) => {
                 total_amount: Math.floor(element.cake.price * element.quantity + itemShippingCost),
                 detail: {
                     images: element.cake.images,
-                    nameCake: element.cake.nameCake,
+                    name: element.cake.name,
                     price: element.cake.price,
                     quantity: element.quantity,
                 },
@@ -138,7 +138,7 @@ const Billing = ({ product, total }) => {
                                 <td>
                                     <img alt="" src={item.cake.images} className="images" />
                                 </td>
-                                <td>{item.cake.nameCake}</td>
+                                <td>{item.cake.name}</td>
                                 <td>{item.cake.price}</td>
                                 <td>{item.quantity}</td>
                                 <td>{item.cake.weight}</td>

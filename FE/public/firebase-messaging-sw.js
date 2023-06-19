@@ -18,13 +18,9 @@ const firebaseConfig = {
 // eslint-disable-next-line no-undef
 firebase.initializeApp(firebaseConfig);
 
-// Retrieve firebase messaging
-// eslint-disable-next-line no-undef
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {
-    console.log('Received background message ', payload);
-
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
         body: payload.notification.body,
@@ -34,5 +30,5 @@ messaging.onBackgroundMessage(function (payload) {
     };
 
     // eslint disable next line no restricted globals
-    self.registration.showNotification(notificationTitle, notificationOptions);
+    // self.registration.showNotification(notificationTitle, notificationOptions);
 });

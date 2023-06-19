@@ -16,18 +16,18 @@ function NotificationComponent() {
                     vapidKey: 'BMHxPXJyw10y2qfn3W7IljBQE7u1YW7ORLeAubHV3_lJUPiOQBGhndWSv4ZbSXHkIUIzAhyN1AaKmst_naCqNZ8',
                 });
                 currentToken &&
-                    axios({
-                        method: 'post',
-                        url: 'http://localhost:3000/firebase/api/subscribeToTopic',
-                        data: {
-                            token: currentToken,
-                        },
-                    })
-                        .then((res) => {
-                            console.log('add ok', res);
-                        })
-                        .catch((e) => console.log(e));
-                setToken(currentToken);
+                    // axios({
+                    //     method: 'post',
+                    //     url: 'http://localhost:3000/firebase/api/subscribeToTopic',
+                    //     data: {
+                    //         token: currentToken,
+                    //     },
+                    // })
+                    //     .then((res) => {
+                    //         console.log('add ok', res);
+                    //     })
+                    //     .catch((e) => console.log(e));
+                    setToken(currentToken);
             } catch (error) {
                 console.log('Error:------------------', error);
             }
@@ -56,30 +56,41 @@ function NotificationComponent() {
         const unsubscribe = onSnapshot(queryRef, (snapshot) => {
             snapshot.docChanges().forEach((change) => {
                 if (change.type === 'added' && change.doc.exists()) {
-                    console.log('thêm ok');
                 } else if (change.type === 'removed') {
                 } else if (change.type === 'modified') {
                     const newOrder = change.doc.data();
-                    console.log(newOrder, change.doc.id);
-                    newOrder.id_user_shipper
-                        ? axios({
-                              method: 'post',
-                              url: 'http://localhost:3000/firebase/api/notifyForOrder',
-                              data: {
-                                  id: change.doc.id,
-                                  status: 'shipping',
-                                  token: token,
-                              },
-                          })
-                        : axios({
-                              method: 'post',
-                              url: 'http://localhost:3000/firebase/api/notifyForOrder',
-                              data: {
-                                  id: change.doc.id,
-                                  status: 'pending',
-                                  token: token,
-                              },
-                          });
+                    newOrder.id_user_shipper &&
+                        newOrder.status === 'shipping' &&
+                        axios({
+                            method: 'post',
+                            url: 'http://localhost:3000/firebase/api/notifyForOrder',
+                            data: {
+                                id: change.doc.id,
+                                status: 'shipping',
+                                token: token,
+                            },
+                        });
+                    newOrder.status === 'pending' &&
+                        axios({
+                            method: 'post',
+                            url: 'http://localhost:3000/firebase/api/notifyForOrder',
+                            data: {
+                                id: change.doc.id,
+                                status: 'pending',
+                                token: token,
+                            },
+                        });
+                    newOrder.id_user_shipper &&
+                        newOrder.status === 'shipped' &&
+                        axios({
+                            method: 'post',
+                            url: 'http://localhost:3000/firebase/api/notifyForOrder',
+                            data: {
+                                id: change.doc.id,
+                                status: 'shipped',
+                                token: token,
+                            },
+                        });
                 }
             });
         });

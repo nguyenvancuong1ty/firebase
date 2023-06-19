@@ -6,8 +6,21 @@ const INCREMENT = 'INCREMENT';
 const DECREASE = 'DECREASE';
 const RESET = 'RESET';
 const CURRENT = 'CURRENT';
+const ACCESSTOKEN = 'ACCESSTOKEN';
+const TOTALCOIN = 'TOTALCOIN';
+const DATACART = 'DATACART';
+const TYPEPRODUCT = 'TYPEPRODUCT';
 
 // Action creators
+const setToken = (value) => ({
+    type: ACCESSTOKEN,
+    payload: value,
+});
+//
+const setTypeProduct = (value) => ({
+    type: TYPEPRODUCT,
+    payload: value,
+});
 const increment = () => ({
     type: INCREMENT,
 });
@@ -21,6 +34,16 @@ const setCurrent = (value) => ({
     payload: value,
 });
 
+const setTotalCoin = (value) => ({
+    type: TOTALCOIN,
+    payload: value,
+});
+
+const setDataCart = (value) => ({
+    type: DATACART,
+    payload: value,
+});
+
 const decrease = () => ({
     type: DECREASE,
 });
@@ -29,6 +52,10 @@ const decrease = () => ({
 const initialState = {
     number: 0,
     isAuth: localStorage.getItem('login'),
+    accessToken: '1',
+    totalCoin: 0,
+    dataCart: [],
+    typeProduct: 'cake',
 };
 
 // Reducer
@@ -58,10 +85,54 @@ const numberReducer = (state = initialState, action) => {
             return state;
     }
 };
+const tokenReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case ACCESSTOKEN:
+            return {
+                ...state,
+                accessToken: action.payload,
+            };
+        default:
+            return state;
+    }
+};
+const typeProductReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case TYPEPRODUCT:
+            return {
+                ...state,
+                typeProduct: action.payload,
+            };
+        default:
+            return state;
+    }
+};
+const totalCoinReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case TOTALCOIN:
+            return {
+                ...state,
+                totalCoin: action.payload,
+            };
+        default:
+            return state;
+    }
+};
 
+const dataCartReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case DATACART:
+            return {
+                ...state,
+                dataCart: action.payload,
+            };
+        default:
+            return state;
+    }
+};
 // Tạo Redux store với reducer
 const store = configureStore({
-    reducer: { numberReducer },
+    reducer: { numberReducer, tokenReducer, totalCoinReducer, dataCartReducer, typeProductReducer },
 });
 
-export { increment, reset, setCurrent, decrease, store };
+export { increment, reset, setCurrent, decrease, store, setToken, setTotalCoin, setDataCart, setTypeProduct };

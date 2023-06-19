@@ -8,25 +8,19 @@ import { db } from '~/firebase';
 import Loading from '~/Loading';
 import Bill from '~/component/Bill';
 import useAxios from '~/useAxios';
+import { useSelector } from 'react-redux';
+import Footer from '~/component/Footer';
+
 function Home(props) {
-    let { data, loading } = useAxios({ url: 'http://localhost:3000/firebase/api/cake', method: 'get' });
+    const typeProduct = useSelector((state) => state.typeProductReducer.typeProduct);
+    let { data, loading } = useAxios({
+        url: `http://localhost:3000/firebase/api/cake?type=${typeProduct}`,
+        method: 'get',
+        authentication: `Bearer ${localStorage.getItem('token')}`,
+    });
     const [dataUser, setDataUser] = useState([]);
     const [type, setType] = useState('shipped');
     const [loading2, setLoading] = useState(false);
-    // const getDataUserPendingType = async () => {
-    //     await axios({
-    //         url: `http://localhost:3000/firebase/api/new-order`,
-    //         method: 'get',
-    //     })
-    //         .then((res) => {
-    //             setDataUser(res.data.data);
-    //             setLoading(false);
-    //         })
-    //         .catch((e) => {
-    //             console.log(e);
-    //             setLoading(false);
-    //         });
-    // };
     useEffect(() => {
         if (type !== 'pending') {
             setLoading(true);
@@ -125,6 +119,7 @@ function Home(props) {
                     </div>
                 )}
             </Container>
+            <Footer></Footer>
         </>
     );
 }

@@ -7,6 +7,7 @@
 .product__content--img {
     width: 100%;
     display: block;
+    /* height: 120px; */
 }
 .product__content--name {
     min-height: 48px;

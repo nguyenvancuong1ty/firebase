@@ -54,9 +54,10 @@ function Cake({ item, setShow }) {
     return (
         <>
             <div to={`/detail/${item.id}`} className="product__content--item">
-                <img src="./frame_1.webp" alt="" className="product__content--img" />
+                <img src="./fa.webp" alt="" className="product__content--img" />
+                {/* <div className="product__content--img" /> */}
                 <div className="product__content--text">
-                    <p className="product__content--name">{item.nameCake}</p>
+                    <p className="product__content--name">{item.name}</p>
                     <p className="product__content--sale--price">{item.price.toLocaleString('en-US')}đ</p>
                     {/* <span className="product__content--price">{item.price}đ</span> */}
                     <Tooltip title="Add to cart" placement="topRight">

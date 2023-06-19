@@ -156,3 +156,11 @@ b {
     cursor: pointer;
     position: relative;
 }
+
+.head__navbar--link {
+    cursor: pointer;
+}
+
+.head__navbar--item.active {
+    color: red;
+}

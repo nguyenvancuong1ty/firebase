@@ -7,6 +7,7 @@ import { useState } from 'react';
 import OrderPage from './Orderpage';
 import LoginCpn from './LoginCpn';
 import NotificationComponent from './Notification';
+import Shop from './Shop';
 
 function App() {
     const [show, setShow] = useState(false);
@@ -16,12 +17,12 @@ function App() {
         <Router>
             <div className="App" onClick={() => setShowCart(false)}>
                 <Header setShow={setShow} showCart={showCart} setShowCart={setShowCart} setUid={setUid} />
-
                 <section style={{ height: 150 }}></section>
                 <Routes>
                     <Route path="/" element={<Home show={show} setShow={setShow} uid={uid} setUid={setUid}></Home>} />
                     <Route path="/order" element={<OrderPage></OrderPage>} />
                     <Route path="/notify" element={<NotificationComponent></NotificationComponent>} />
+                    <Route path="/shop" element={<Shop></Shop>} />
                 </Routes>
             </div>
             {show && <LoginCpn setShow={setShow} setUid={setUid} />}
