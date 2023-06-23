@@ -8,7 +8,6 @@ import OrderPage from './Orderpage';
 import LoginCpn from './LoginCpn';
 import NotificationComponent from './Notification';
 import Shop from './Shop';
-import MessengerCustomerChat from 'react-messenger-customer-chat';
 function App() {
     const [show, setShow] = useState(false);
     const [showCart, setShowCart] = useState(false);
@@ -24,7 +23,6 @@ function App() {
                     <Route path="/notify" element={<NotificationComponent></NotificationComponent>} />
                     <Route path="/shop" element={<Shop></Shop>} />
                 </Routes>
-                <MessengerCustomerChat pageId="100093651007165" appId="1207380196627705" htmlRef="<REF_STRING>" />
             </div>
             {show && <LoginCpn setShow={setShow} setUid={setUid} />}
         </Router>
