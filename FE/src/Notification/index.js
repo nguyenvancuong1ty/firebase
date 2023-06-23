@@ -59,6 +59,7 @@ function NotificationComponent() {
                 } else if (change.type === 'removed') {
                 } else if (change.type === 'modified') {
                     const newOrder = change.doc.data();
+                    console.log('push');
                     newOrder.id_user_shipper &&
                         newOrder.status === 'shipping' &&
                         axios({
