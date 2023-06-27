@@ -38,6 +38,9 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
             },
@@ -258,26 +261,19 @@
                 "description": "",
                 "parameters": [
                     {
-                        "name": "Authorization",
+                        "name": "authorization",
                         "in": "header",
-                        "type": "string",
-                        "required": true,
-                        "description": "Access token with Bearer scheme",
-                        "example": "Bearer <access_token>"
+                        "type": "string"
                     },
                     {
                         "name": "User-Agent",
                         "in": "header",
-                        "type": "string",
-                        "required": true,
-                        "description": "User agent header"
+                        "type": "string"
                     },
                     {
                         "name": "id",
                         "in": "query",
-                        "type": "string",
-                        "required": true,
-                        "description": "ID parameter"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -504,13 +500,6 @@
                 }
             }
         },
-        "/notification": {
-            "get": {
-                "description": "",
-                "parameters": [],
-                "responses": {}
-            }
-        },
         "/subscribeToTopic": {
             "post": {
                 "description": "",
@@ -573,6 +562,26 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/search": {
+            "get": {
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "User-Agent",
+                        "in": "header",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
             }

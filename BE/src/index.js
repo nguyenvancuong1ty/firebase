@@ -1,14 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const routers = require('./routes');
+const routers = require('./routers/routes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
 // const db = require("./firebase");
+const helmet = require('helmet');
+const productRouter = require('./routers/product');
 
 const app = express();
 
+app.use(helmet());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(
     cors({
@@ -17,16 +21,11 @@ app.use(
     }),
 );
 app.use(cookieParser());
-const port = 3000;
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//Redis
-
-//Redis
-
 app.use('/firebase/api/', routers);
+app.use('/firebase/api/product/', productRouter);
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+module.exports = app;

@@ -1,0 +1,3 @@
+@url = http://localhost:3000/firebase/api
+GET {{url}}/product/new-order
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsInJvbGUiOiJzaGlwcGVyIiwiaWF0IjoxNjg3ODUxMDE4LCJleHAiOjE2ODgwMjM4MTh9.oLYS9yo1Cx6lqM8X32Hx3fJWYU1t7XtNfLrbjqp8qMs

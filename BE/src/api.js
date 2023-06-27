@@ -1,10 +1,11 @@
-const { db, auth, Timestamp, messaging } = require('./firebase');
+const { db, auth, Timestamp, messaging } = require('./db/firebase');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { client } = require('./middleware/cache');
+
 // Create
 
 const authenticateToken = async (req, res, next) => {
@@ -63,7 +64,7 @@ const getProduct = async (req, res) => {
             data: data,
         });
     } catch (e) {
-        return res.status(500).json({ error: e.message });
+        return res.status(500).json({ error: 'Lỗi' + e.message });
     }
 };
 
@@ -103,11 +104,12 @@ const login = async (req, res) => {
         const account = doc.data();
         data.push({ Id: doc.id, ...account });
     });
+    console.log(process.env.SECRET);
     if (Array.isArray(data) && data.length > 0 && bcrypt.compareSync(password, data[0].password)) {
-        const accessToken = jwt.sign({ email: email, role: data[0].type_account }, 'shhhhh', {
-            expiresIn: '10m',
+        const accessToken = jwt.sign({ email: email, role: data[0].type_account }, process.env.SECRET, {
+            expiresIn: '2d',
         });
-        const refreshToken = jwt.sign({ email: email, role: data[0].type_account }, 'shhhhh', {
+        const refreshToken = jwt.sign({ email: email, role: data[0].type_account }, process.env.SECRET, {
             expiresIn: '7d',
         });
         res.cookie('refreshToken', refreshToken, { httpOnly: true });
@@ -137,10 +139,10 @@ const handleLoginWithGoogle = async (req, res) => {
         timeCreate: Timestamp.fromDate(new Date()),
     };
     try {
-        const accessToken = jwt.sign({ email: email, role: data.type_account }, 'shhhhh', {
+        const accessToken = jwt.sign({ email: email, role: data.type_account }, process.env.SECRET, {
             expiresIn: '10s',
         });
-        const refreshToken = jwt.sign({ email: email, role: data.type_account }, 'shhhhh', {
+        const refreshToken = jwt.sign({ email: email, role: data.type_account }, process.env.SECRET, {
             expiresIn: '7d',
         });
         const accountRef = db.collection('account').doc(uid);

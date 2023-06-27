@@ -4,7 +4,7 @@
     "description": "start with firebase",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon ./src",
+        "start": "nodemon server.js",
         "swagger-autogen": "node swagger.js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "webpack"
@@ -25,6 +25,7 @@
         "express": "^4.18.2",
         "firebase": "^9.22.1",
         "firebase-admin": "^11.9.0",
+        "helmet": "^7.0.0",
         "jsonwebtoken": "^9.0.0",
         "nodemon": "^2.0.22",
         "redis": "^4.6.7",

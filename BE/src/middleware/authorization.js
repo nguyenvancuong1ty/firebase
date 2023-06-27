@@ -6,7 +6,7 @@ const authorization = (authority) => (req, res, next) => {
     }
 
     try {
-        jwt.verify(token, 'shhhhh', function (err, decoded) {
+        jwt.verify(token, process.env.SECRET, function (err, decoded) {
             if (decoded) {
                 authority.includes(decoded.role)
                     ? next()

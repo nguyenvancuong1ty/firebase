@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const authentication = (req, res, next) => {
+    console.log(process.env.SECRET);
     try {
         const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : false;
         if (!token) {
@@ -7,7 +8,7 @@ const authentication = (req, res, next) => {
                 error: 'auth',
             });
         }
-        jwt.verify(token, 'shhhhh', function (err, decoded) {
+        jwt.verify(token, process.env.SECRET, function (err, decoded) {
             if (decoded) {
                 next();
             } else {
@@ -21,7 +22,7 @@ const authentication = (req, res, next) => {
     }
 };
 const refreshToken = (req, res) => {
-    const secretKey = 'shhhhh';
+    const secretKey = process.env.SECRET;
     try {
         const token = req.cookies.refreshToken;
         if (!token) {

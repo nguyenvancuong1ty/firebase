@@ -11,7 +11,7 @@ const {
     getDoc,
 } = require('firebase/firestore');
 const { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } = require('firebase/auth');
-const { db, auth, Timestamp } = require('./firebase');
+const { db, auth, Timestamp } = require('./db/firebase');
 const fs = require('fs');
 const path = require('path');
 

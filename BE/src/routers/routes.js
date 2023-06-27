@@ -1,6 +1,5 @@
 const express = require('express');
-const { addCake, updateCake, deleteCake, register, addCakes, authenticateToken, addAccounts } = require('./function');
-const { pushNotification } = require('./notification');
+const { addCake, updateCake, deleteCake, register, addCakes, authenticateToken, addAccounts } = require('../function');
 const {
     getOrder,
     distance,
@@ -18,11 +17,11 @@ const {
     handleLoginWithGoogle,
     getProduct,
     getAllProduct,
-} = require('./api');
-const { getDistance } = require('./middleware/getDistance');
-const { authentication, refreshToken } = require('./middleware/authentication');
-const authorization = require('./middleware/authorization');
-const { cache } = require('./middleware/cache');
+} = require('../api');
+const { getDistance } = require('../middleware/getDistance');
+const { authentication, refreshToken } = require('../middleware/authentication');
+const authorization = require('../middleware/authorization');
+const { cache } = require('../middleware/cache');
 const router = express.Router();
 router.get('/', (req, res) => {
     res.send('<h1>Chào chúng mày</h1>');
@@ -53,8 +52,6 @@ router.post('/cart', addToCart);
 router.patch('/cart/:id', updateCart);
 
 router.get('/distance', distance);
-
-router.get('/notification', pushNotification);
 
 router.post('/subscribeToTopic', addAccountToListNotify);
 
