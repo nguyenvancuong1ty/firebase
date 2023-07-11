@@ -1,3 +1,5 @@
-@url = http://localhost:3000/firebase/api
-GET {{url}}/product/new-order
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsInJvbGUiOiJzaGlwcGVyIiwiaWF0IjoxNjg3ODUxMDE4LCJleHAiOjE2ODgwMjM4MTh9.oLYS9yo1Cx6lqM8X32Hx3fJWYU1t7XtNfLrbjqp8qMs
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsInJvbGUiOiJzaGlwcGVyIiwiaWF0IjoxNjg4MzQ5MjUxLCJleHAiOjE2ODg1MjIwNTF9.Ys5FYSDkRxO6NcF4BHeQTA34fvBF1JqsD9nk9fjNe4U
+# GET http://localhost:3000/ts/search
+
+GET http://localhost:3000/product?type=candy
+Authorization: Bearer {{token}}

@@ -17,8 +17,9 @@
         }
     },
     "security": {
-        "apiKey": [{}]
+        "apiKey": [122432432432432424324242]
     },
+
     "paths": {
         "/account": {
             "get": {
@@ -40,16 +41,7 @@
         "/account/login": {
             "post": {
                 "description": "",
-                "parameters": [
-                    {
-                        "name": "username",
-                        "type": "string"
-                    },
-                    {
-                        "name": "password",
-                        "type": "string"
-                    }
-                ],
+                "parameters": [],
                 "responses": {}
             }
         },
@@ -114,26 +106,12 @@
                 "responses": {}
             }
         },
-        "/product?": {
+        "/product": {
             "get": {
                 "description": "",
                 "parameters": [],
                 "responses": {}
-            }
-        },
-        "/product/search": {
-            "get": {
-                "description": "",
-
-                "responses": {},
-                "security": [
-                    {
-                        "apiKey": [{}]
-                    }
-                ]
-            }
-        },
-        "/product": {
+            },
             "post": {
                 "description": "",
                 "parameters": [
@@ -143,6 +121,13 @@
                         "type": "string"
                     }
                 ],
+                "responses": {}
+            }
+        },
+        "/product/search": {
+            "get": {
+                "description": "",
+                "parameters": [],
                 "responses": {}
             }
         },

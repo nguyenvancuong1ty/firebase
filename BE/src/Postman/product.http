@@ -1,0 +1,19 @@
+// add product
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsInJvbGUiOiJzaGlwcGVyIiwiaWF0IjoxNjg4MzQ5MjUxLCJleHAiOjE2ODg1MjIwNTF9.Ys5FYSDkRxO6NcF4BHeQTA34fvBF1JqsD9nk9fjNe4U
+
+# POST http://localhost:3000/product
+get http://localhost:3000/product?type=cake
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name" :  "newProduct",
+    "detail" : "Bash moi banh moi day cac ban",
+    "quantity" : 50,
+    "price" : 500000,
+    "sold" : 55,
+    "inventory" : 555,
+    "weight" : 3.1,
+    "images" : "https://mindbodygreen-res.cloudinary.com/image/upload/c_fill,w_2000,h_1200,g_auto,fl_lossy,f_jpg/org/gti5ndttekv6zokuj.jpg",
+    "type" : "clothes"
+}
