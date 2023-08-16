@@ -29,12 +29,7 @@ class CartService {
     static addToCart(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { uid, cakeID } = req.body;
-            const querySnapshot = yield firebase_1.db
-                .collection('cart')
-                .where('cakeID', '==', cakeID)
-                .where('uid', '==', uid)
-                .where('deleted', '==', false)
-                .get();
+            const querySnapshot = yield firebase_1.db.collection('cart').where('cakeID', '==', cakeID).where('uid', '==', uid).where('deleted', '==', false).get();
             const response = [];
             querySnapshot.forEach((doc) => {
                 response.push(doc.data());

@@ -1,0 +1,10 @@
+POST https://www.googleapis.com/oauth2/v4/token
+Content-Type: application/json
+
+{
+  "client_id": "483759755558-ae1naepuk0lgo7iaeudnhfd7ols0nbgh.apps.googleusercontent.com",
+  "client_secret": "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",
+  "refresh_token": "1//04ouOQHC_LCxfCgYIARAAGAQSNwF-L9IrxuVTzNa350E91Jg2yFHNQgrUIHRiqAXQtN_d81bdUnedYbVT0D3iYY8J9DVPa7AzVZs",
+  "grant_type": "refresh_token",
+}
+

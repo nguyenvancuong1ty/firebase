@@ -25,6 +25,9 @@ class ProductController {
     }
     getAllProduct(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            /* #swagger.security = [{
+                   "apiKeyAuth": []
+            }] */
             const data = yield service_product_1.default.getAllProduct();
             (0, cache_1.saveDataToCache)(req, data);
             return new response_success_1.OK(data).send(res);

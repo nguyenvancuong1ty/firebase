@@ -16,9 +16,6 @@ const client = createClient();
 exports.client = client;
 const cache = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        client.on('error', (err) => {
-            console.log('Redis Client Error', err);
-        });
         !client.isOpen && (yield client.connect());
         const key = '__express__' + (req.originalUrl || req.url);
         const data = yield client.get(key);
@@ -31,7 +28,7 @@ const cache = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
         }
     }
     catch (error) {
-        console.log(error, 'lỗi');
+        console.log('lỗi');
         client.isOpen && (yield client.disconnect());
         next();
     }

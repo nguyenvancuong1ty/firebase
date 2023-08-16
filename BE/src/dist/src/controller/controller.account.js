@@ -56,7 +56,7 @@ class AccountController {
     confirmCode(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const data = yield service_account_1.default.confirmCode(req, res);
-            console.log(data);
+            console.log('DATA', data);
             if (data) {
                 return new response_success_1.OK(data, 'get code success, pleas check you email').send(res);
             }

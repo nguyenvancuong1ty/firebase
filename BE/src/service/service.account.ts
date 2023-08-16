@@ -3,12 +3,13 @@ import { Timestamp, db } from '../db/firebase';
 import Account from '../models/model.account';
 import { Conflict, INTERNAL_SERVER_ERROR } from '../utils/response.error';
 import path from 'path';
+import { getAccessToken } from '../utils/auth2.0';
+import { mailDefine } from '../utils/mail.define';
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const ejs = require('ejs');
-
 const readFile = async (path: string) => {
     try {
         const data = await new Promise<TemplateStringsArray>((resolve, reject) => {
@@ -28,8 +29,6 @@ const readFile = async (path: string) => {
 
 class AccountService {
     static async login(req: Request, res: Response): Promise<any> {
-        console.log('--------------------------------------------');
-
         const { email, password }: any = req.body;
         console.log(email, password);
 
@@ -171,19 +170,8 @@ class AccountService {
     }
 
     static async confirmCode(req: Request, res: Response): Promise<any> {
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            port: 587,
-            secure: false, // true for 465, false for other ports
-            auth: {
-                type: 'OAuth2',
-                user: 'nguyenvancuong19032002@gmail.com', // generated ethereal user
-                clientId: process.env.CLIENT_ID,
-                clientSecret: process.env.CLIENT_SECRET,
-                refreshToken: process.env.REFRESH_TOKEN,
-                accessToken: process.env.ACCESS_TOKEN,
-            },
-        });
+        const transporter = await mailDefine();
+        console.log('đi');
         const code: number = Math.floor((Math.random() + 1) * 10000);
         try {
             await db.runTransaction(async (transaction: any) => {
@@ -205,8 +193,6 @@ class AccountService {
                 }
                 const html = await readFile(path.join(path.resolve(process.cwd()), 'public/index.ejs'));
                 const renderedHtml = ejs.render(html, { code: code });
-                console.log('DATA-------', typeof renderedHtml);
-                console.log('DATA-------', renderedHtml);
                 await transporter.sendMail({
                     from: 'Email thank you',
                     to: [req.params.email], // list of receivers
@@ -220,7 +206,7 @@ class AccountService {
             });
             return true;
         } catch (error) {
-            console.log('E---', error);
+            console.log('E--', error);
             return false;
         }
     }
@@ -229,19 +215,7 @@ class AccountService {
         const { confirm } = req.body;
         const code = await db.collection('codeConfirm').where('email', '==', req.params.email).get();
         if (confirm * 1 === code.docs[0].data().code) {
-            let transporter = nodemailer.createTransport({
-                service: 'gmail',
-                port: 587,
-                secure: false, // true for 465, false for other ports
-                auth: {
-                    type: 'OAuth2',
-                    user: 'nguyenvancuong19032002@gmail.com', // generated ethereal user
-                    clientId: process.env.CLIENT_ID,
-                    clientSecret: process.env.CLIENT_SECRET,
-                    refreshToken: process.env.REFRESH_TOKEN,
-                    accessToken: process.env.ACCESS_TOKEN,
-                },
-            });
+            const transporter = await mailDefine();
             const newPass = './;;adsfjiwefawed';
             await transporter
                 .sendMail({

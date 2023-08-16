@@ -3,7 +3,7 @@ import { FORBIDDEN, UnAuthorized } from '../utils/response.error';
 
 const jwt = require('jsonwebtoken');
 export const authorization = (authority: any) => (req: Request | any, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
     if (!token) {
         return new UnAuthorized('Missing token. Authorization denied.').send(res);
     }

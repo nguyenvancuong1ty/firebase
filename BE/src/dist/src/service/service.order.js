@@ -15,11 +15,7 @@ class OrderService {
         return __awaiter(this, void 0, void 0, function* () {
             const { id, type } = req.query;
             const orderRef = firebase_1.db.collection('order');
-            const querySnapshot = yield orderRef
-                .where('deleted', '==', false)
-                .where('id_user_shipper', '==', id)
-                .where('status', '==', type)
-                .get();
+            const querySnapshot = yield orderRef.where('deleted', '==', false).where('id_user_shipper', '==', id).where('status', '==', type).get();
             const response = [];
             querySnapshot.forEach((doc) => {
                 const product = doc.data();

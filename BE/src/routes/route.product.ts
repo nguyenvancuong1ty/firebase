@@ -13,9 +13,9 @@ const productController = new ProductController();
 
 //routes
 productRouter.get('/product?', cache, handleError(productController.getProduct));
-productRouter.get('/product/search', checkApiKey, cache, handleError(productController.getAllProduct));
+productRouter.get('/product/search', cache, handleError(productController.getAllProduct));
 productRouter.post('/product', authentication, authorization('admin'), handleError(productController.addProduct));
-productRouter.patch('/product/:id', authentication, authorization('admin'), handleError(productController.deleteProduct));
+productRouter.patch('/product/:id', authentication, handleError(productController.deleteProduct));
 productRouter.put('/product/:id', authentication, authorization('admin'), handleError(productController.updateProduct));
 productRouter.get('/product/distance', handleError(productController.distance));
 

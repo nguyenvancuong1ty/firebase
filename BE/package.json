@@ -6,7 +6,7 @@
     "type": "commonjs",
     "scripts": {
         "start": "nodemon server.ts",
-        "swagger-autogen": "node swagger.js",
+        "autogen": "node swagger.js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "npx tsc server.ts",
         "dev": "concurrently \"npx tsc --watch --project tsconfig.json\" \"nodemon -q src/dist/server.js\""
@@ -29,7 +29,7 @@
         "express": "^4.18.2",
         "firebase": "^9.22.1",
         "firebase-admin": "^11.9.0",
-        "google-auth-library": "^8.9.0",
+        "googleapis": "^121.0.0",
         "helmet": "^7.0.0",
         "jsonwebtoken": "^9.0.0",
         "nodemailer": "^6.9.3",

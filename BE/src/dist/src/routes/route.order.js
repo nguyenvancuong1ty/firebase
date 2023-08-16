@@ -10,14 +10,12 @@ const authentication_1 = require("../middleware/authentication");
 const response_error_1 = require("../utils/response.error");
 const controller_order_1 = __importDefault(require("../controller/controller.order"));
 const orderController = new controller_order_1.default();
-//Middleware check permission
-orderRouter.use(authentication_1.authentication);
 //routes
-orderRouter.get('/', (0, response_error_1.handleError)(orderController.getOrder));
-orderRouter.get('/new-order', (0, response_error_1.handleError)(orderController.getNewOrder));
-orderRouter.post('/', (0, response_error_1.handleError)(orderController.addOrder));
-orderRouter.get('/order-for-customer', (0, response_error_1.handleError)(orderController.getOrderForCustomer));
-orderRouter.patch('/:id', (0, response_error_1.handleError)(orderController.deleteShallowOrder));
-orderRouter.patch('/', (0, response_error_1.handleError)(orderController.updateOrder));
-orderRouter.post('/notify', (0, response_error_1.handleError)(orderController.notifyForOrder));
+orderRouter.get('/order/', authentication_1.authentication, (0, response_error_1.handleError)(orderController.getOrder));
+orderRouter.get('/order/new-order', authentication_1.authentication, (0, response_error_1.handleError)(orderController.getNewOrder));
+orderRouter.post('/order/', authentication_1.authentication, (0, response_error_1.handleError)(orderController.addOrder));
+orderRouter.get('/order/order-for-customer', authentication_1.authentication, (0, response_error_1.handleError)(orderController.getOrderForCustomer));
+orderRouter.patch('/order/:id', authentication_1.authentication, (0, response_error_1.handleError)(orderController.deleteShallowOrder));
+orderRouter.patch('/order/', authentication_1.authentication, (0, response_error_1.handleError)(orderController.updateOrder));
+orderRouter.post('/order/notify', authentication_1.authentication, (0, response_error_1.handleError)(orderController.notifyForOrder));
 exports.default = orderRouter;

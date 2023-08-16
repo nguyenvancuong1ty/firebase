@@ -4,7 +4,7 @@ exports.authorization = void 0;
 const response_error_1 = require("../utils/response.error");
 const jwt = require('jsonwebtoken');
 const authorization = (authority) => (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
     if (!token) {
         return new response_error_1.UnAuthorized('Missing token. Authorization denied.').send(res);
     }

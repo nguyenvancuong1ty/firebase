@@ -16,9 +16,10 @@ const port = process.env.PORT;
 
 app.use(helmet());
 app.use(express.static('public'));
+
 app.use(
     cors({
-        origin: 'http://localhost:3006',
+        origin: ['http://localhost:3006', 'https://cuongcodedao.id.vn', /myfirebase\.com$/, /cakes\.com$/],
         credentials: true,
     }),
 );
@@ -40,7 +41,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     const statusCode = req.statusCode || 500;
-    console.log(error);
     res.status(statusCode).json({
         statusCode: statusCode,
         message: error.message,

@@ -2,8 +2,8 @@
     "swagger": "2.0",
     "info": {
         "version": "1.0.0",
-        "title": "REST API - Please authorize apiKey before doing so",
-        "description": "🤢🤢🤢🤢🤢"
+        "title": "REST API",
+        "description": "Please authorize apiKey before doing so"
     },
     "host": "localhost:3000",
     "basePath": "/",
@@ -13,13 +13,13 @@
             "type": "apiKey",
             "name": "x-api-key",
             "in": "header",
-            "description": "Contact admin to collect"
+            "description": "Some description..."
         },
         "bearerAuth": {
             "name": "Authorization",
             "in": "header",
             "type": "apiKey",
-            "description": "Sign in to collect",
+            "description": "JWT Authorization header",
             "x-defaultValue": "Bearer"
         }
     },
@@ -28,8 +28,14 @@
     "paths": {
         "/account": {
             "get": {
-                "summary": "Only for administrators",
-                "description": "Only for administrators",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -71,13 +77,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 },
                 "security": [{ "x-api-key": [] }]
@@ -102,13 +108,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -131,20 +137,6 @@
                         "description": "Password",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "confirm_password",
-                        "in": "formData",
-                        "description": "confirm_password",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "confirmCode",
-                        "in": "formData",
-                        "description": "confirmCode authorize (To /account/confirm-code/{email})",
-                        "required": true,
-                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -161,13 +153,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -212,13 +204,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -248,13 +240,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -284,13 +276,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -321,13 +313,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -349,13 +341,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -384,13 +376,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -425,13 +417,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             },
@@ -464,13 +456,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -493,13 +485,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -534,13 +526,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -569,13 +561,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -610,13 +602,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -645,13 +637,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             },
@@ -678,13 +670,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             },
@@ -711,13 +703,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -746,13 +738,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -781,13 +773,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -822,13 +814,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -857,13 +849,13 @@
                         "description": "Authorization information is missing or invalid"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "not found"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "500": {
-                        "description": "INTERNAL_SERVER_ERROR"
+                        "description": "Unexpected error"
                     }
                 }
             }

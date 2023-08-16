@@ -19,16 +19,16 @@ const port = process.env.PORT;
 app.use((0, helmet_1.default)());
 app.use(express_1.default.static('public'));
 app.use((0, cors_1.default)({
-    origin: 'http://localhost:3006',
+    origin: ['http://localhost:3006', 'https://cuongcodedao.id.vn', /myfirebase\.com$/, /cakes\.com$/],
     credentials: true,
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/account', route_account_1.default);
-app.use('/product', route_product_1.default);
-app.use('/cart', route_cart_1.default);
-app.use('/order', route_order_1.default);
+app.use('/', route_account_1.default);
+app.use('/', route_product_1.default);
+app.use('/', route_cart_1.default);
+app.use('/', route_order_1.default);
 app.use((req, res, next) => {
     const error = new Error('Pages Not Found');
     req.statusCode = 404;
@@ -36,7 +36,6 @@ app.use((req, res, next) => {
 });
 app.use((error, req, res, next) => {
     const statusCode = req.statusCode || 500;
-    console.log(error);
     res.status(statusCode).json({
         statusCode: statusCode,
         message: error.message,

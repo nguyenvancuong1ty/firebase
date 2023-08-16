@@ -18,5 +18,3 @@ Authorization: Bearer {{token}}
 #   "refresh_token": "1//04fomQ5nlHRVVCgYIARAAGAQSNwF-L9IryBy8Be-HsgrpT-wqhpcozXe1z8qeRCaL0YgCqu2d5NlBJapVydYn-ucBfYrN35Hesj4",
 #   "grant_type": "refresh_token"
 # }
-
- 

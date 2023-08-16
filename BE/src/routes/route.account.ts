@@ -10,12 +10,12 @@ import { Response } from 'express';
 const accountController = new AccountController();
 // accountRouter.use(checkApiKey);
 accountRouter.get('/account', authorization(['admin']), (req: Request, res: Response) => {
-    res.json('Hello! this is api website by cuongdepchai 😍😍😍');
+    res.json('Hello! this is website API of cuongdepchai 😍😍😍');
 });
 accountRouter.post('/account/login', handleError(accountController.login));
 accountRouter.post('/account/login-google', handleError(accountController.handleLoginWithGoogle));
-accountRouter.post('/account/', handleError(accountController.create));
-accountRouter.post('/account/:id', authentication, handleError(accountController.changePassword));
+accountRouter.post('/account/', checkApiKey, handleError(accountController.create));
+accountRouter.post('/account/:id', checkApiKey, handleError(accountController.changePassword));
 accountRouter.get('/account/confirm-code/:email', handleError(accountController.confirmCode));
-accountRouter.post('/account/change-password/:email', handleError(accountController.forgetPassword));
+accountRouter.post('/account/change-password/:email', authentication, handleError(accountController.forgetPassword));
 export default accountRouter;

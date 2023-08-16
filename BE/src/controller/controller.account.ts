@@ -36,7 +36,7 @@ class AccountController {
 
     async confirmCode(req: Request, res: Response): Promise<any> {
         const data = await AccountService.confirmCode(req, res);
-        console.log(data);
+        console.log('DATA', data);
 
         if (data) {
             return new OK(data, 'get code success, pleas check you email').send(res);

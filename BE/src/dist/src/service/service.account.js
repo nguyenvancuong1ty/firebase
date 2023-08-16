@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const firebase_1 = require("../db/firebase");
 const response_error_1 = require("../utils/response.error");
 const path_1 = __importDefault(require("path"));
+const mail_define_1 = require("../utils/mail.define");
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
@@ -42,6 +43,7 @@ class AccountService {
     static login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { email, password } = req.body;
+            console.log(email, password);
             const querySnapshot = yield firebase_1.db.collection('account').where('username', '==', email).get();
             const data = [];
             querySnapshot.docs.map((doc) => __awaiter(this, void 0, void 0, function* () {
@@ -186,19 +188,8 @@ class AccountService {
     }
     static confirmCode(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let transporter = nodemailer.createTransport({
-                service: 'gmail',
-                port: 587,
-                secure: false,
-                auth: {
-                    type: 'OAuth2',
-                    user: 'nguyenvancuong19032002@gmail.com',
-                    clientId: process.env.CLIENT_ID,
-                    clientSecret: process.env.CLIENT_SECRET,
-                    refreshToken: process.env.REFRESH_TOKEN,
-                    accessToken: process.env.ACCESS_TOKEN,
-                },
-            });
+            const transporter = yield (0, mail_define_1.mailDefine)();
+            console.log('đi');
             const code = Math.floor((Math.random() + 1) * 10000);
             try {
                 yield firebase_1.db.runTransaction((transaction) => __awaiter(this, void 0, void 0, function* () {
@@ -221,8 +212,6 @@ class AccountService {
                     }
                     const html = yield readFile(path_1.default.join(path_1.default.resolve(process.cwd()), 'public/index.ejs'));
                     const renderedHtml = ejs.render(html, { code: code });
-                    console.log('DATA-------', typeof renderedHtml);
-                    console.log('DATA-------', renderedHtml);
                     yield transporter.sendMail({
                         from: 'Email thank you',
                         to: [req.params.email],
@@ -237,7 +226,7 @@ class AccountService {
                 return true;
             }
             catch (error) {
-                console.log('E---', error);
+                console.log('E--', error);
                 return false;
             }
         });
@@ -247,19 +236,7 @@ class AccountService {
             const { confirm } = req.body;
             const code = yield firebase_1.db.collection('codeConfirm').where('email', '==', req.params.email).get();
             if (confirm * 1 === code.docs[0].data().code) {
-                let transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    port: 587,
-                    secure: false,
-                    auth: {
-                        type: 'OAuth2',
-                        user: 'nguyenvancuong19032002@gmail.com',
-                        clientId: process.env.CLIENT_ID,
-                        clientSecret: process.env.CLIENT_SECRET,
-                        refreshToken: process.env.REFRESH_TOKEN,
-                        accessToken: process.env.ACCESS_TOKEN,
-                    },
-                });
+                const transporter = yield (0, mail_define_1.mailDefine)();
                 const newPass = './;;adsfjiwefawed';
                 yield transporter
                     .sendMail({

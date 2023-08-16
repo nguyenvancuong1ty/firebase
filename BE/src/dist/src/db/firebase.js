@@ -25,6 +25,7 @@ const serviceAccount = require('../../serviceAccountKey.json');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://fir-44abd-default-rtdb.firebaseio.com',
+    ignoreUndefinedProperties: true,
 });
 const db = getFirestore();
 exports.db = db;
