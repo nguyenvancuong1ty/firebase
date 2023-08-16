@@ -1,7 +1,8 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '~/firebase';
+import api from '~/config/axios';
 const Shop = () => {
     const [imgUrl, setImgUrl] = useState(null);
     const [progresspercent, setProgresspercent] = useState(0);
@@ -33,7 +34,9 @@ const Shop = () => {
     const handleClick = () => {
         axios
             .post(
-                `http://localhost:3000/firebase/api/refreshToken?type_account=${localStorage.getItem('account')}`,
+                `${process.env.REACT_APP_API_URL}/firebase/api/refreshToken?type_account=${localStorage.getItem(
+                    'account',
+                )}`,
                 {},
                 { withCredentials: true },
             )
@@ -45,7 +48,13 @@ const Shop = () => {
                 console.log(error);
             });
     };
-
+    useEffect(() => {
+        async function fetchData() {
+            const res = await api.post('/account/login', { id: 100 });
+            console.log(res);
+        }
+        fetchData();
+    }, []);
     return (
         <div>
             <div>

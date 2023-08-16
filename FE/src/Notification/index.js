@@ -15,19 +15,7 @@ function NotificationComponent() {
                 const currentToken = await getToken(messaging, {
                     vapidKey: 'BMHxPXJyw10y2qfn3W7IljBQE7u1YW7ORLeAubHV3_lJUPiOQBGhndWSv4ZbSXHkIUIzAhyN1AaKmst_naCqNZ8',
                 });
-                currentToken &&
-                    // axios({
-                    //     method: 'post',
-                    //     url: 'http://localhost:3000/firebase/api/subscribeToTopic',
-                    //     data: {
-                    //         token: currentToken,
-                    //     },
-                    // })
-                    //     .then((res) => {
-                    //         console.log('add ok', res);
-                    //     })
-                    //     .catch((e) => console.log(e));
-                    setToken(currentToken);
+                setToken(currentToken);
             } catch (error) {
                 console.log('Error:------------------', error);
             }
@@ -59,37 +47,46 @@ function NotificationComponent() {
                 } else if (change.type === 'removed') {
                 } else if (change.type === 'modified') {
                     const newOrder = change.doc.data();
-                    console.log('push');
+                    console.log(newOrder);
                     newOrder.id_user_shipper &&
                         newOrder.status === 'shipping' &&
                         axios({
                             method: 'post',
-                            url: 'http://localhost:3000/firebase/api/notifyForOrder',
+                            url: `${process.env.REACT_APP_API_URL}/order/notify`,
                             data: {
                                 id: change.doc.id,
                                 status: 'shipping',
                                 token: token,
                             },
+                            headers: {
+                                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                            },
                         });
                     newOrder.status === 'pending' &&
                         axios({
                             method: 'post',
-                            url: 'http://localhost:3000/firebase/api/notifyForOrder',
+                            url: `${process.env.REACT_APP_API_URL}/order/notify`,
                             data: {
                                 id: change.doc.id,
                                 status: 'pending',
                                 token: token,
+                            },
+                            headers: {
+                                Authorization: `Bearer ${localStorage.getItem('token')}`,
                             },
                         });
                     newOrder.id_user_shipper &&
                         newOrder.status === 'shipped' &&
                         axios({
                             method: 'post',
-                            url: 'http://localhost:3000/firebase/api/notifyForOrder',
+                            url: `${process.env.REACT_APP_API_URL}/order/notify`,
                             data: {
                                 id: change.doc.id,
                                 status: 'shipped',
                                 token: token,
+                            },
+                            headers: {
+                                Authorization: `Bearer ${localStorage.getItem('token')}`,
                             },
                         });
                 }

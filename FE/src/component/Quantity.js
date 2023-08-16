@@ -9,24 +9,30 @@ function Quantity({ item, checkOut }) {
     const [num, setNum] = useState(item.quantity);
     const handleIncrease = async (item) => {
         if (checkOut.some((checkedItem) => checkedItem.cakeID === item.cakeID)) {
-            dispatch(setTotalCoin(totalCoin + item.cake.price));
+            dispatch(setTotalCoin(totalCoin + item.product.price));
         }
         dispatch(increment());
         setNum((prev) => prev + 1);
         await axios({
-            url: `http://localhost:3000/firebase/api/cart/${item.id}`,
+            url: `${process.env.REACT_APP_API_URL}/cart/${item.id}`,
             method: 'patch',
             data: {
                 quantity: num + 1,
             },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
         });
         axios({
-            url: `http://localhost:3000/firebase/api/cart/${localStorage.getItem('uid')}`,
+            url: `${process.env.REACT_APP_API_URL}/cart/${localStorage.getItem('uid')}`,
             method: 'get',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
         })
             .then((res) => {
-                const newData = res.data.data.sort((a, b) => {
-                    return a.cake.price - b.cake.price;
+                const newData = res.data.metadata.sort((a, b) => {
+                    return a.product.price - b.product.price;
                 });
                 dispatch(setDataCart(newData));
             })
@@ -35,37 +41,45 @@ function Quantity({ item, checkOut }) {
 
     const handleDecrease = async (item) => {
         if (checkOut.some((checkedItem) => checkedItem.cakeID === item.cakeID)) {
-            dispatch(setTotalCoin(totalCoin - item.cake.price));
+            dispatch(setTotalCoin(totalCoin - item.product.price));
         }
         dispatch(decrease());
         setNum((prev) => prev - 1);
         await axios({
-            url: `http://localhost:3000/firebase/api/cart/${item.id}`,
+            url: `${process.env.REACT_APP_API_URL}/cart/${item.id}`,
             method: 'patch',
             data: {
                 quantity: num - 1,
             },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
         });
         axios({
-            url: `http://localhost:3000/firebase/api/cart/${localStorage.getItem('uid')}`,
+            url: `${process.env.REACT_APP_API_URL}/cart/${localStorage.getItem('uid')}`,
             method: 'get',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
         })
             .then((res) => {
                 const newData = res.data.data.sort((a, b) => {
-                    return a.cake.price - b.cake.price;
+                    return a.product.price - b.product.price;
                 });
                 dispatch(setDataCart(newData));
             })
             .catch((e) => alert(e.message));
     };
+
     useEffect(() => {
         const total =
             Array.isArray(checkOut) && checkOut.length > 0
                 ? checkOut.reduce((init, item) => {
-                      return init + item.cake.price * item.quantity;
+                      return init + item.product.price * item.quantity;
                   }, 0)
                 : 0;
         dispatch(setTotalCoin(total));
+        // eslint-disable-next-line
     }, [checkOut]);
     return (
         <>

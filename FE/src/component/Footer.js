@@ -43,7 +43,11 @@ function Footer() {
                         </ul>
                         <div className="footer__head--right">
                             <div className="footer__head--right--icon">
-                                <img src="./img/email-icon.svg" alt="" className="footer__head--right--img" />
+                                <img
+                                    src="https://nguyenvancuong1ty.github.io/intern_cake/img/email-icon.svg"
+                                    alt=""
+                                    className="footer__head--right--img"
+                                />
                             </div>
                             <p className="footer__head--right--text">
                                 Bạn muốn nhận khuyến mãi đặc biệt? Đăng ký ngay.
@@ -60,7 +64,7 @@ function Footer() {
                     </div>
                 </div>
                 <div className="container footer__content">
-                    <div className="row">
+                    <div className="row rowss">
                         <div className="col-xl-3 footer__content--item">
                             <img src="./img/logo-footer.webp" alt="" className="footer__content--logo" />
                             <div className="footer__content--contact">
@@ -116,7 +120,11 @@ function Footer() {
                             </p>
                             <b className="footer__content--title">Phương thức thanh toán</b>
                             <div className="footer__content--pay">
-                                <img src="./img/check1.webp" alt="" className="footer__pay--img" />
+                                <img
+                                    src="https://nguyenvancuong1ty.github.io/intern_cake/img/check1.webp"
+                                    alt=""
+                                    className="footer__pay--img"
+                                />
                             </div>
                         </div>
                     </div>

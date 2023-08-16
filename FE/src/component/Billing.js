@@ -5,7 +5,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
-const Billing = ({ product, total }) => {
+const Billing = ({ product, total, setShowBilling }) => {
     const [address, setAddress] = useState('');
     const [distance, setDistance] = useState(0);
     const [totalShippingCost, setTotalShippingCost] = useState(0);
@@ -18,7 +18,10 @@ const Billing = ({ product, total }) => {
         } else {
             axios({
                 method: 'get',
-                url: `http://localhost:3000/firebase/api/distance?origin=${address}&destination=394 Mỹ Đình 1, Hà Nội`,
+                url: `${process.env.REACT_APP_API_URL}/product/distance?origin=${address}&destination=394 Mỹ Đình 1, Hà Nội`,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
             }).then((res) => {
                 setDistance(res.data / 1000);
             });
@@ -27,13 +30,13 @@ const Billing = ({ product, total }) => {
 
     const getShipCost = (item, distance) => {
         let shipCost = 0;
-        if (item.cake.weight * item.quantity <= 1.2) {
+        if (item.product.weight * item.quantity <= 1.2) {
             shipCost = distance * 2000;
-        } else if (item.cake.weight * item.quantity > 1.2 && item.cake.weight * item.quantity <= 3) {
+        } else if (item.product.weight * item.quantity > 1.2 && item.product.weight * item.quantity <= 3) {
             shipCost = distance * 3000;
-        } else if (item.cake.weight * item.quantity > 3 && item.cake.weight * item.quantity <= 5) {
+        } else if (item.product.weight * item.quantity > 3 && item.product.weight * item.quantity <= 5) {
             shipCost = distance * 4000;
-        } else if (item.cake.weight * item.quantity > 5 && item.cake.weight * item.quantity <= 10) {
+        } else if (item.product.weight * item.quantity > 5 && item.product.weight * item.quantity <= 10) {
             shipCost = distance * 5000;
         } else {
             shipCost = distance * 6000;
@@ -61,26 +64,30 @@ const Billing = ({ product, total }) => {
             const data = {
                 uid: element.uid,
                 shipping_address: address,
-                weight: element.cake.weight * element.quantity,
+                weight: element.product.weight * element.quantity,
                 shipping_cost: itemShippingCost,
-                total_amount: Math.floor(element.cake.price * element.quantity + itemShippingCost),
+                total_amount: Math.floor(element.product.price * element.quantity + itemShippingCost),
                 detail: {
-                    images: element.cake.images,
-                    name: element.cake.name,
-                    price: element.cake.price,
+                    images: element.product.images,
+                    name: element.product.name,
+                    price: element.product.price,
                     quantity: element.quantity,
                 },
             };
             return axios({
                 method: 'post',
-                url: 'http://localhost:3000/firebase/api/order',
+                url: `${process.env.REACT_APP_API_URL}/order`,
                 data: data,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
             });
         });
 
         Promise.all(promises)
             .then(() => {
                 setLoading(false);
+                setShowBilling(false);
                 notifySuccess();
             })
             .catch((error) => {
@@ -96,6 +103,14 @@ const Billing = ({ product, total }) => {
     return (
         <div className="billing-wrapper">
             <h2>Hóa đơn</h2>
+            <h2
+                className="close"
+                onClick={() => {
+                    setShowBilling(false);
+                }}
+            >
+                X
+            </h2>
             <Space direction="horizontal" size="middle">
                 <Input
                     placeholder="Địa chỉ giao hàng"
@@ -136,14 +151,14 @@ const Billing = ({ product, total }) => {
                         return (
                             <tr key={index}>
                                 <td>
-                                    <img alt="" src={item.cake.images} className="images" />
+                                    <img alt="" src={item.product.images} className="images" />
                                 </td>
-                                <td>{item.cake.name}</td>
-                                <td>{item.cake.price}</td>
+                                <td>{item.product.name}</td>
+                                <td>{item.product.price}</td>
                                 <td>{item.quantity}</td>
-                                <td>{item.cake.weight}</td>
+                                <td>{item.product.weight}</td>
                                 <td>{itemShippingCost}</td>
-                                <td>{Math.floor(item.cake.price * item.quantity + itemShippingCost)}</td>
+                                <td>{Math.floor(item.product.price * item.quantity + itemShippingCost)}</td>
                             </tr>
                         );
                     })}
@@ -181,6 +196,7 @@ const Billing = ({ product, total }) => {
             )}
             <Modal
                 title="Thông tin vận chuyển"
+                zIndex={99999}
                 open={isModalOpen}
                 onOk={() => {
                     setIsModalOpen(false);

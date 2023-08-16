@@ -5,9 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
-const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
+const Bill = ({ items, setType, type, setDataUser, loading, setLoading, buttonActive, setButtonActive }) => {
     const [data, setData] = useState(items);
-    const [buttonActive, setButtonActive] = useState(3);
     useEffect(() => {
         setData(items);
     }, [items]);
@@ -48,10 +47,6 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
         setData(newData);
     };
 
-    const handleClickNewOrder = () => {
-        setType('pending');
-        setButtonActive(2);
-    };
     const handlePickup = (item) => {
         confirm({
             zIndex: 9999,
@@ -60,10 +55,13 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
             onOk() {
                 setLoading(true);
                 axios({
-                    url: `http://localhost:3000/firebase/api/order?id=${item.Id}&id_user_shipper=${localStorage.getItem(
+                    url: `${process.env.REACT_APP_API_URL}/order?id=${item.Id}&id_user_shipper=${localStorage.getItem(
                         'uid',
                     )}&status=shipping&type_date=start_shipping_date`,
                     method: 'patch',
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
                 })
                     .then(() => {
                         const newData = items.filter((data) => {
@@ -76,8 +74,11 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
                     .catch(() => {
                         toast.error('Có người đã nhận đơn này rồi', { position: toast.POSITION.TOP_CENTER });
                         axios({
-                            url: 'http://localhost:3000/firebase/api/new-order',
+                            url: `${process.env.REACT_APP_API_URL}/order/new-order`,
                             method: 'get',
+                            headers: {
+                                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                            },
                         }).then((res) => {
                             setDataUser(res.data.data);
                             setLoading(false);
@@ -95,10 +96,13 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
             onOk() {
                 setLoading(true);
                 axios({
-                    url: `http://localhost:3000/firebase/api/order?id=${item.Id}&id_user_shipper=${localStorage.getItem(
+                    url: `${process.env.REACT_APP_API_URL}/order?id=${item.Id}&id_user_shipper=${localStorage.getItem(
                         'uid',
                     )}&status=shipped`,
                     method: 'patch',
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
                 })
                     .then(() => {
                         const newData = items.filter((data) => {
@@ -121,8 +125,11 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
             onOk() {
                 setLoading(true);
                 axios({
-                    url: `http://localhost:3000/firebase/api/order?id=${item.Id}&status=pending`,
+                    url: `${process.env.REACT_APP_API_URL}/order?id=${item.Id}&status=pending`,
                     method: 'patch',
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
                 })
                     .then(() => {
                         const newData = items.filter((data) => {
@@ -137,6 +144,7 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
             onCancel() {},
         });
     };
+    console.log(buttonActive, '----', type);
     return (
         <div className="bill-container">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -159,7 +167,13 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
                     >
                         Đơn đã nhận
                     </Button>
-                    <Button className={buttonActive === 2 && 'button-active'} onClick={handleClickNewOrder}>
+                    <Button
+                        className={buttonActive === 2 && 'button-active'}
+                        onClick={() => {
+                            setType('pending');
+                            setButtonActive(2);
+                        }}
+                    >
                         Nhận đơn mới
                     </Button>
                     <Button
@@ -181,7 +195,6 @@ const Bill = ({ items, setType, type, setDataUser, loading, setLoading }) => {
                 </Space>
             </div>
             <table className="bill-table">
-                {console.log('re-render')}
                 <thead>
                     <tr>
                         <th>Order total (excluding shipping)</th>

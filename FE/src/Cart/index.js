@@ -18,7 +18,7 @@ function Cart({ dataCart, uid }) {
 
     const handleDelete = (item) => {
         confirm({
-            zIndex: 9999,
+            zIndex: 99999,
             bodyStyle: { height: 150 },
             centered: true,
             icon: <ExclamationCircleFilled />,
@@ -26,8 +26,11 @@ function Cart({ dataCart, uid }) {
             content: 'Xóa mặt hàng này vào giỏ hàng của bạn?',
             onOk() {
                 axios({
-                    url: `http://localhost:3000/firebase/api/cart/${item.id}`,
+                    url: `${process.env.REACT_APP_API_URL}/cart/${item.id}`,
                     method: 'patch',
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
                 })
                     .then(() => {
                         messageApi.open({
@@ -48,7 +51,7 @@ function Cart({ dataCart, uid }) {
         });
         localStorage.setItem('number_product', localStorage.getItem('number_product') - item.total_quantity);
     };
-    const onChange = (e, data) => {
+    const onChange = async (e, data) => {
         if (e.target.checked) {
             setCheckOut([...checkOut, data]);
         } else {
@@ -57,19 +60,25 @@ function Cart({ dataCart, uid }) {
             });
             setCheckOut(newItem);
         }
-        axios({
-            url: `http://localhost:3000/firebase/api/cart/${localStorage.getItem('uid')}`,
-            method: 'get',
-        })
-            .then((res) => {
-                const newData = res.data.data.sort((a, b) => {
-                    return a.cake.price - b.cake.price;
+        try {
+            const res = await axios({
+                url: `${process.env.REACT_APP_API_URL}/cart/${localStorage.getItem('uid')}`,
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            console.log(res);
+            const newData =
+                res.data &&
+                res.data.metadata.sort((a, b) => {
+                    return a.product.price - b.product.price;
                 });
-                dispatch(setDataCart(newData));
-            })
-            .catch((e) => alert(e.message));
+            dispatch(setDataCart(newData));
+        } catch (error) {
+            alert(error.message);
+        }
     };
-    console.log(dataCart);
     return (
         <>
             <div className="wrap_cart">
@@ -79,11 +88,11 @@ function Cart({ dataCart, uid }) {
                         {dataCart.map((item, index) => (
                             <div className="items" key={index}>
                                 <Checkbox onChange={(e) => onChange(e, item)}></Checkbox>
-                                <img className="images" src={item.cake.images} alt="" />
+                                <img className="images" src={item.product.images} alt="" />
                                 <div className="content">
-                                    <b>{item.cake.name}</b>
+                                    <b>{item.product.name}</b>
                                     <div>
-                                        <div className="price">Giá: {item.cake.price.toLocaleString('en-US')}</div>
+                                        <div className="price">Giá: {item.product.price.toLocaleString('en-US')}</div>
 
                                         <Quantity item={item} checkOut={checkOut} />
                                     </div>
@@ -112,7 +121,9 @@ function Cart({ dataCart, uid }) {
                                 Tiến hành Đặt hàng
                             </button>
                         </footer>
-                        {showBilling && <Billing product={checkOut} total={totalCoin} />}
+                        {showBilling && (
+                            <Billing product={checkOut} total={totalCoin} setShowBilling={setShowBilling} />
+                        )}
                         <ToastContainer autoClose={1000} />
                     </>
                 ) : (

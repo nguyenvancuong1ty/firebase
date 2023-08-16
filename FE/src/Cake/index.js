@@ -3,40 +3,50 @@ import './Cake.css';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from 'antd';
 import { Modal, message } from 'antd';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { increment } from '~/redux';
+import api from '~/config/axios';
+import { Link } from 'react-router-dom';
 const { confirm } = Modal;
 function Cake({ item, setShow }) {
     const [messageApi2, contextHolder2] = message.useMessage();
     const dispatch = useDispatch();
     const addToCartSuccess = () => {
-        console.log('ce');
         messageApi2.open({
+            style: { marginTop: 120 },
             type: 'success',
             content: 'Thêm thành công!',
         });
     };
     const handleAddToCart = async (ID) => {
-        await axios({
-            url: `http://localhost:3000/firebase/api/cart`,
-            method: 'post',
-            data: {
-                uid: localStorage.getItem('uid'),
-                cakeID: ID,
-            },
-        })
-            .then((res) => {
-                if (res.data.status !== 409) {
-                    dispatch(increment());
-                }
+        try {
+            const res = await api.post(
+                '/cart',
+                {
+                    uid: localStorage.getItem('uid'),
+                    cakeID: ID,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                },
+            );
+
+            if (res.data.status !== 409) {
+                dispatch(increment());
                 addToCartSuccess();
-            })
-            .catch((e) => alert(e.status));
+            }
+        } catch (error) {
+            if (error.response.status === 409) {
+                addToCartSuccess();
+            } else alert(error.status);
+        }
     };
 
     const showConfirm = (cakeID) => {
         confirm({
+            style: { marginTop: 150 },
             zIndex: 9999,
             title: 'Mua hàng',
             content: 'Thêm mặt hàng này vào giỏ hàng của bạn?',
@@ -48,12 +58,13 @@ function Cake({ item, setShow }) {
             },
         });
     };
-    const handleAddCart = (cakeID) => {
+    const handleAddCart = (e, cakeID) => {
+        e.preventDefault()
         localStorage.getItem('uid') ? showConfirm(cakeID) : setShow(true);
     };
     return (
         <>
-            <div to={`/detail/${item.id}`} className="product__content--item">
+            <Link to={`/detail/${item.Id}`} className="product__content--item">
                 <img src="./fa.webp" alt="" className="product__content--img" />
                 {/* <div className="product__content--img" /> */}
                 <div className="product__content--text">
@@ -61,7 +72,7 @@ function Cake({ item, setShow }) {
                     <p className="product__content--sale--price">{item.price.toLocaleString('en-US')}đ</p>
                     {/* <span className="product__content--price">{item.price}đ</span> */}
                     <Tooltip title="Add to cart" placement="topRight">
-                        <div className="buy" onClick={() => handleAddCart(item.Id)}>
+                        <div className="buy" onClick={(e) => handleAddCart(e, item.Id)}>
                             <FontAwesomeIcon icon={faBagShopping} size="xl" className="buy-icon" />
                         </div>
                     </Tooltip>
@@ -86,7 +97,7 @@ function Cake({ item, setShow }) {
                 </div>
 
                 <img src={item.images} alt="" className="product__content--img--foreign" />
-            </div>
+            </Link>
             {contextHolder2}
         </>
     );

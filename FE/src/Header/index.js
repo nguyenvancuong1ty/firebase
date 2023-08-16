@@ -14,6 +14,7 @@ function Header(props) {
     const dispatch = useDispatch();
     const number = useSelector((state) => state.numberReducer.number);
     const dataCart = useSelector((state) => state.dataCartReducer.dataCart);
+    const [showOption, setShowOption] = useState(false);
     const uid = localStorage.getItem('uid');
     const [active, setActive] = useState(1);
     let number_product =
@@ -24,20 +25,28 @@ function Header(props) {
             : 0;
     useEffect(() => {
         dispatch(setCurrent(number_product));
+        // eslint-disable-next-line
     }, [number_product]);
     const navigate = useNavigate();
     useEffect(() => {
-        axios({
-            url: `http://localhost:3000/firebase/api/cart/${uid}`,
-            method: 'get',
-        })
-            .then((res) => {
-                const newData = res.data.data.sort((a, b) => {
-                    return a.cake.price - b.cake.price;
-                });
-                dispatch(setDataCart(newData));
+        uid &&
+            axios({
+                url: `${process.env.REACT_APP_API_URL}/cart/${uid}`,
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
             })
-            .catch((e) => alert(e.message));
+                .then((res) => {
+                    const newData =
+                        res.data &&
+                        res.data.metadata.sort((a, b) => {
+                            return a.product.price - b.product.price;
+                        });
+                    dispatch(setDataCart(newData));
+                })
+                .catch((e) => alert(e.message));
+        // eslint-disable-next-line
     }, [uid, number]);
     const handleLogout = () => {
         confirm({
@@ -58,24 +67,29 @@ function Header(props) {
             },
         });
     };
-
+    const handleClickOption = () => {};
     return (
         <header>
-            <div className="container">
+            <div className="container res_header">
                 <div className="row header">
                     <div className="col-xl-3">
-                        <NavLink to="/">
+                        <NavLink to="/" className="res_logo">
                             <img
                                 src="https://theme.hstatic.net/200000460475/1000990214/14/logo.png?v=127"
                                 alt=""
                                 className="logo"
                             />
                         </NavLink>
+                        <div className="opstion" onClick={handleClickOption}>
+                            <div className="opstion--icon"></div>
+                            <div className="opstion--icon"></div>
+                            <div className="opstion--icon"></div>
+                        </div>
                     </div>
-                    <div className="col-xl-5">
+                    <div className="col-xl-5 res_search">
                         <Search />
                     </div>
-                    <div className="col-xl-4">
+                    <div className="col-xl-4 res_option">
                         <ul className="header__opstion">
                             <li className="order header__opstion--item">
                                 <NavLink to="/order" className="header__opstion--link">
@@ -90,11 +104,11 @@ function Header(props) {
                             <li className="shop header__opstion--item">
                                 <NavLink to="/shop" className="header__opstion--link">
                                     <img
-                                        src="https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/address-icon.webp"
+                                        src="https://raw.githubusercontent.com/nguyenvancuong1ty/imagas/main/ba.png"
                                         alt=""
                                         className="header__opstion--img"
                                     />
-                                    <p className="header__opstion--title">Cửa hàng</p>
+                                    <p className="header__opstion--title">Thông tin</p>
                                 </NavLink>
                             </li>
                             <li className="header__opstion--item account">
@@ -221,7 +235,6 @@ function Header(props) {
                     </ul>
                 </div>
             </div>
-            {/* <ToastContainer /> */}
         </header>
     );
 }

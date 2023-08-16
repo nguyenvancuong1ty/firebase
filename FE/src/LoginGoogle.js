@@ -18,7 +18,7 @@ const LoginGoogle = ({ setShow, setUid }) => {
             const user = result.user;
             const ok = await axios({
                 method: 'post',
-                url: 'http://localhost:3000/firebase/api/login-google',
+                url: `${process.env.REACT_APP_API_URL}/account/login-google`,
                 data: {
                     uid: user.uid,
                     email: user.email,
@@ -27,10 +27,10 @@ const LoginGoogle = ({ setShow, setUid }) => {
                 withCredentials: true,
             });
 
+            console.log(ok, token);
             setUid(user.uid);
-            console.log(ok);
-            localStorage.setItem('token', ok.data.accessToken);
-            localStorage.setItem('address', ok.data.address);
+            localStorage.setItem('token', ok.data.metadata.accessToken);
+            localStorage.setItem('address', ok.data.metadata.address);
             localStorage.setItem('uid', user.uid);
             localStorage.setItem('account', 'customer');
             dispatch(setCurrent(number));

@@ -25,11 +25,14 @@ function Search() {
         const fetchData = async () => {
             await axios({
                 method: 'get',
-                url: `http://localhost:3000/firebase/api/search`,
+                url: `${process.env.REACT_APP_API_URL}/product/search`,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
             })
                 .then((res) => {
-                    const newData = res.data.data.filter((item) => {
-                        return item.name.toLowerCase().includes(textInput.replace(/\s/g, ''));
+                    const newData = res.data.metadata.filter((item) => {
+                        return item.name.toLowerCase().includes(textInput.replace(/\s/g, '').toLowerCase());
                     });
                     setData(newData);
                     setTimeout(() => {
@@ -58,7 +61,7 @@ function Search() {
             <div className="header-input">
                 <input
                     type="text"
-                    placeholder="Ban can gi?"
+                    placeholder="Enter name product"
                     value={textInput}
                     onChange={(e) => {
                         handleSearch(e);
@@ -77,8 +80,8 @@ function Search() {
                         <div className="search">
                             {data.map((item, index) => (
                                 <Link
-                                    to={`/detail/${item.id}`}
-                                    className="item"
+                                    to={`/detail/${item.Id}`}
+                                    className="search-item"
                                     key={index}
                                     onClick={() => {
                                         setShow(false);
@@ -90,7 +93,7 @@ function Search() {
                                     <div className="content">
                                         <b>{item.name}</b>
                                         <div>
-                                            <h1>Giá: {item.price.toLocaleString('en-US')}</h1>
+                                            <h1 className="price">Giá: {item.price.toLocaleString('en-US')}</h1>
                                             <b>{item.total_quantity}</b>
                                         </div>
                                     </div>

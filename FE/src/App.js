@@ -8,6 +8,7 @@ import OrderPage from './Orderpage';
 import LoginCpn from './LoginCpn';
 import NotificationComponent from './Notification';
 import Shop from './Shop';
+import Detail from './Detail';
 function App() {
     const [show, setShow] = useState(false);
     const [showCart, setShowCart] = useState(false);
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/order" element={<OrderPage></OrderPage>} />
                     <Route path="/notify" element={<NotificationComponent></NotificationComponent>} />
                     <Route path="/shop" element={<Shop></Shop>} />
+                    <Route path="/detail/:id" element={<Detail></Detail>} />
                 </Routes>
             </div>
             {show && <LoginCpn setShow={setShow} setUid={setUid} />}
